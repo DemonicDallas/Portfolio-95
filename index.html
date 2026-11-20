@@ -10,8 +10,28 @@
 
 </head>
 <body>
-    <main class="area-de-trabalho">
+    <!-- ===== INICIALIZAÇÃO DA BIOS ===== -->
+    <div id="tela-ligar" class="tela-boot">
+        <button id="botao-ligar" type="button">⏻ ligar o computador </button>
+    </div>
 
+    <div id="tela-preta" class="tela-boot oculta"></div>
+
+    <div id="tela-bios" class="tela-boot oculta">
+        <pre id="bios-texto"></pre>
+    </div>
+
+    <div id="tela-splash" class="tela-boot oculta">
+        <img class="splash-imagem" src="img/portfolio95-splash-animado.webp" alt="">
+        <div class="barra-progresso"></div>
+    </div>
+
+    <audio id="som-inicio" src="sons/inicio.wav" preload="auto"></audio>
+
+    
+    <!-- ===== Área de Trabalho ===== -->
+    
+    <main class="area-de-trabalho">
         <button class="icone" type="button" data-janela="meu-computador">
             <img src="img/icones/windows-plus-my-computer.png" alt="">
             <span>Meu Computador</span>
@@ -43,7 +63,7 @@
             <span>Meus Projetos</span>
         </button>
 
-        <button class="icone" type="button" data-janela="wordPad">
+        <button class="icone" type="button" data-janela="bloco-de-notas">
             <img src="img/icones/windows-notepad.png" alt="">
             <span>Bloco de notas</span>
         </button>
