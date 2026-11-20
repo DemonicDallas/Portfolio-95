@@ -1,0 +1,148 @@
+:root {
+    --fundo: #008080;
+    --cinza: #C0C0C0;
+    --branco: #FFFFFF;
+    --cinza-claro: #DFDFDF;
+    --cinza-escuro: #808080;
+    --preto: #000000;
+    --azul: #000080;
+    --altura-barra: 44px;
+}
+
+@font-face {
+    font-family: "W95FA";
+    src: url("../fonts/win95fa-latin-400-normal.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: var(--fundo);
+    font-family: "W95FA", sans-serif;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+button {
+    font: inherit;
+}
+
+.area-de-trabalho {
+    display: flex;
+    flex-direction: column;
+    /* empilha de cima para baixo */
+    flex-wrap: wrap;
+    align-items: flex-start;
+    /* alinha a esquerda */
+    align-content: flex-start;
+    gap: 8px;
+    padding: 1em;
+    height: calc(100vh - var(--altura-barra));
+}
+
+.icone {
+    background: none;
+    border: none;
+    padding: 4px;
+    width: 90px;
+    color: var(--branco);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    /* empilha de cima para baixo */
+    align-items: center;
+    /* centraliza na horizontal */
+    gap: 4px;
+    /* espaço entre a imagem e o nome */
+    font-size: 16px;
+}
+
+.icone img {
+    width: 68px;
+    height: 68px;
+    image-rendering: pixelated;
+}
+
+.icone:focus {
+    outline: none;
+}
+
+.icone:focus span {
+    background: var(--azul);
+}
+
+
+.barra-de-tarefas {
+    position: fixed;
+    bottom: 0;
+    /* colada na base */
+    left: 0;
+    /* começa na borda esquerda */
+    right: 0;
+    /* termina na borda direita */
+    height: var(--altura-barra);
+    background: var(--cinza);
+    box-shadow:
+        inset 0 1px var(--cinza-claro),
+        inset 0 2px var(--branco);
+    display: flex;
+    align-items: center;
+    /* centraliza na vertical */
+    gap: 4px;
+    /* espaço entre as partes */
+    padding: 0 2px;
+
+}
+
+.janelas-abertas {
+    flex: 1;
+}
+
+.botao-start {
+    background: var(--cinza);
+    border: none;
+    box-shadow:
+        inset -1px -1px var(--preto),
+        inset 1px 1px var(--branco),
+        inset -2px -2px var(--cinza-escuro),
+        inset 2px 2px var(--cinza-claro);
+
+    height: 42px;
+    padding: 0 6px 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.botao-start img {
+    width: 28px;
+    height: 28px;
+}
+
+.botao-start:active {
+    box-shadow:
+        inset -1px -1px var(--branco),
+        inset 1px 1px var(--preto),
+        inset -2px -2px var(--cinza-claro),
+        inset 2px 2px var(--cinza-escuro);
+}
+
+.relogio {
+    color: var(--preto);
+    padding: 0 8px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco);
+
+}
+
+
+
