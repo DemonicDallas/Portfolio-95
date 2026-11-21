@@ -241,10 +241,15 @@ document.addEventListener("pointerdown", (evento) => {
     if (!barra) return;
     if (evento.target.closest("button")) return;   // o ✕ não arrasta
 
-    janelaArrastada = barra.closest(".janela");
+    const janela = barra.closest(".janela");                // 1. acha a janela
+    if (janela.classList.contains("maximizada")) return;             // 2. maximizada? não arrasta
+    janelaArrastada = janela;                               // 3. senão, começa a arrastar
+    janela.classList.add("arrastada");
+    
     const posicao = janelaArrastada.getBoundingClientRect();
     difX = evento.clientX - posicao.left;
     difY = evento.clientY - posicao.top;
+    
 });
 
 document.addEventListener("pointermove", (evento) => {
