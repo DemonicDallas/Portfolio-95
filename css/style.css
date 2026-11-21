@@ -278,6 +278,10 @@ legend {
     background: var(--fundo);
 }
 
+.dh-painel {
+    min-height: 330px;
+}
+
 .bandeja {
     display: flex;
     align-items: center;
