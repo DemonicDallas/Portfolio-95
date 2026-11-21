@@ -50,7 +50,7 @@ const dicas = [
     "O Internet Explorer leva a um site secreto dos anos 90.",
     "Quer dizer alguma coisa sobre os projetos ou sobre o portfólio? Abra o Inbox e manda uma mensagem.",
     "Acha os sons de clique irritantes? O botão de volume perto do relógio desliga-os.",
-    "Na próxima vez que acessar meu site e não quiser ver a inicialização, aperte Esc para pular a inicialização."
+    "Na próxima vez que acessar meu site, pressione Esc e pule a inicialização completamente."
 ];
 
 // ===== TOCAR O SOM DE INÍCIO (só se o som estiver ligado) =====
@@ -177,17 +177,37 @@ document.addEventListener("click", (evento) => {
     fecharJanela(janela);
 });
 
+// ===== QUANDO CLICAR EM UMA JANELA =====
+
+document.addEventListener("pointerdown", (evento) => {
+    const janela = evento.target.closest(".janela");
+    if (!janela) return;
+
+    ativarJanela(janela);
+});
+
+
+
 // ===== QUANDO ABRIR UMA JANELA =====
 function abrirJanela(janela) {
     janela.classList.remove("oculta");
+    if (!acharBotaoTarefa(janela)) {
+        criarBotaoTarefa(janela);
+    }
+    ativarJanela(janela);
 }
 
+// ===== QUANDO FECHAR UMA JANELA =====
 function fecharJanela(janela) {
     janela.classList.add("oculta");
+    const botao = acharBotaoTarefa(janela);
+    if (botao) {
+        botao.remove();
+    }
 }
 
+// ===== Sessão de dicas sendo mostradas na janela de boas-vindas =====
 let indiceDica = Math.floor(Math.random() * dicas.length);
-
 
 function mostrarDica() {
     textoDica.textContent = dicas[indiceDica];
@@ -212,7 +232,6 @@ try {
 
 
 // ===== ARRASTAR JANELAS =====
-// ===== ARRASTAR JANELAS =====
 let janelaArrastada = null;   // a janela que está sendo segurada
 let difX = 0;                 // onde, dentro da janela, o mouse pegou
 let difY = 0;
@@ -236,5 +255,112 @@ document.addEventListener("pointermove", (evento) => {
 
 document.addEventListener("pointerup", () => {
     janelaArrastada = null;
+});
+
+
+// ===== QUANDO DER DOIS CLIQUES EM UM ÍCONE =====
+document.addEventListener("dblclick", (evento) => {
+    const icone = evento.target.closest(".icone");
+    if(!icone) return;
+    
+    const nome = icone.dataset.janela;
+    const janela = document.getElementById("janela-" + nome);
+    if (!janela) return; // icone que ainda não tem janela;
+
+    abrirJanela(janela);
+});
+
+
+// ====== TRAZER UMA JANELA PARA A FRENTE ======
+let zTopo = 10; // É o mesmo index do inicio que eu tinha colocado, porém, agora é uma variável que vai aumentando a cada clique em uma janela
+
+function ativarJanela(janela){
+    
+    // todas as ficam com a barra cinza em cima;
+
+    for(const outra of document.querySelectorAll(".janela")){
+        outra.classList.add("inativa");
+    }
+
+    // A que está sendo clicada fica com a barra azul em cima;
+    janela.classList.remove("inativa");
+
+    // Ela também ganha um indice maior que as outras, para ficar na frente;
+    zTopo = zTopo + 1;
+    janela.style.zIndex = zTopo;
+
+    // botões da barra: todos soltos...
+    for (const outro of document.querySelectorAll(".botao-tarefa")) {
+        outro.classList.remove("ativo");
+    }
+    // ...menos o desta janela
+    acharBotaoTarefa(janela).classList.add("ativo");
+}
+
+// ===== QUANDO MINIMIZAR UMA JANELA =====
+function minimizarJanela(janela) {
+    // 1. a janela some (mesma classe do fechar)
+    janela.classList.add("oculta");
+    // 2. a janela fica inativa (barra cinza)
+    janela.classList.add("inativa");
+    // 3. o botão dela na barra perde o "ativo" (fica solto, mas NÃO é apagado)
+    acharBotaoTarefa(janela).classList.remove("ativo");
+}
+
+function maximizarJanela(janela) {
+    janela.classList.toggle("maximizada");
+}
+// ===== BOTÕES DA BARRA DE TAREFAS =====
+const janelasAbertas = document.querySelector(".janelas-abertas");
+
+function criarBotaoTarefa(janela){
+    const botao = document.createElement("button");  // cria o botao
+    botao.type = "button";
+    botao.className = "botao-tarefa";
+    botao.dataset.janela = janela.id;
+    botao.textContent = janela.querySelector(".titulo").textContent;
+    janelasAbertas.appendChild(botao);  // Deixa minimizado na barra de tarefas
+}
+
+function acharBotaoTarefa(janela){
+    return janelasAbertas.querySelector(`.botao-tarefa[data-janela="${janela.id}"]`);
+}  
+
+
+// ===== QUANDO CLICAR EM UM BOTÃO DA BARRA DE TAREFAS =====
+document.addEventListener("click", (evento) => {
+    const botao = evento.target.closest(".botao-tarefa");
+    if (!botao) return;
+
+    const janela = document.getElementById(botao.dataset.janela);
+
+    if (janela.classList.contains("oculta")) {
+        // minimizada → volta
+        abrirJanela(janela);
+    } else if (janela.classList.contains("inativa")) {
+        // aberta, mas atrás de outra → vem para a frente
+        ativarJanela(janela);
+    } else {
+        // aberta e na frente → minimiza
+        minimizarJanela(janela);
+    }
+});
+
+// ===== QUANDO CLICAR EM UM BOTÃO DE MINIMIZAR =====
+document.addEventListener("click", (evento) => {
+    const botao = evento.target.closest(".botao-minimizar");
+    if (!botao) return;
+
+    const janela = botao.closest(".janela");
+    minimizarJanela(janela);
+});
+
+// ===== QUANDO CLICAR EM UM BOTÃO DE MAXIMIZAR =====
+document.addEventListener("click", (evento) => {
+    const botao = evento.target.closest(".botao-maximizar");
+    if (!botao) return;
+
+    const janela = botao.closest(".janela");
+    maximizarJanela(janela);
 });
 

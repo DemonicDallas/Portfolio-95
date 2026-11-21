@@ -101,12 +101,26 @@ button {
     gap: 4px;
     /* espaço entre as partes */
     padding: 0 2px;
-    z-index: 100;
+    z-index: 999;
 
 }
 
 .janelas-abertas {
     flex: 1;
+    display: flex;
+    gap: 4px;
+}
+
+.janela.inativa .barra-titulo{
+    background: var(--cinza-escuro);
+    color: var(--cinza);
+}
+
+.janela.maximizada{
+    top: 0 !important;
+    left: 0 !important;
+    width: 100%;
+    height: calc(100vh - var(--altura-barra));
 }
 
 
@@ -126,7 +140,7 @@ button {
 
 /* Botões (Iniciar e Ligar) */
 
-.botao-start, #botao-ligar{
+.botao-start, #botao-ligar, .botao-tarefa {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -144,8 +158,7 @@ button {
     cursor: pointer;
 }
 
-
-.botao-start:active, #botao-ligar:active {
+.botao-start:active, #botao-ligar:active,.botao-tarefa:active, .botao-tarefa.ativo {
     box-shadow:
         inset -1px -1px var(--branco),
         inset 1px 1px var(--preto),
@@ -157,7 +170,6 @@ button {
 .botao-start img {
     width: 28px;
     height: 28px;
-    align-self: right;
 }
 
 .botao-volume {
@@ -171,6 +183,17 @@ button {
     width: 24px;
     height: 24px;
 }
+
+
+.botao-tarefa{
+    width: 240px;
+    justify-content: flex-start; /* texto fica a esquerda */
+    padding: 0 10px;
+    white-space: nowrap; /* não quebra linha */
+    overflow: hidden;
+}
+
+
 
 
 /* Telas de inicialização */
@@ -297,12 +320,24 @@ button {
     user-select: none;
 }
 
-.barra-titulo .botao-fechar {
-    width: 24px;
+.botoes-titulo {
+    display: flex;
+    gap: 2px;
+}
+
+.barra-titulo button {
+    width: 22px;
     height: 22px;
     padding: 0;
     font-size: 14px;
     color: var(--preto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.barra-titulo .botao-minimizar {
+    padding-bottom: 6px;
 }
 
 /* Bv-titulo */

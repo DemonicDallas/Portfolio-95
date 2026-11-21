@@ -80,8 +80,77 @@
 
     </main>
 
-   <!-- ===== JANELAS ===== -->
-<div id="janela-boas-vindas" class="janela oculta">
+       <!-- ===== JANELAS ===== -->
+
+    <!-- Boas-vindas -->
+    <div id="janela-boas-vindas" class="janela oculta">
+        <div class="barra-titulo">
+            <span class="titulo">Bem-vindo</span>
+            <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+        </div>
+
+        <div class="conteudo-janela">
+            <h1 class="bv-titulo">Bem-vindo ao <b>Portfolio</b> 95</h1>
+
+            <div class="bv-corpo">
+                <div class="bv-dica">
+                    <p class="bv-pergunta">Você sabia...</p>
+                    <p id="bv-texto-dica">Clique duas vezes em Meus Projetos para ver o que eu já desenvolvi.</p>
+                </div>
+
+                <div class="bv-botoes">
+                    <button type="button" id="bv-proxima-dica">Próxima dica</button>
+                </div>
+            </div>
+
+            <div class="bv-rodape">
+                <label>
+                    <input type="checkbox" id="bv-mostrar" checked>
+                    Mostrar esta tela na próxima vez
+                </label>
+                <button type="button" class="botao-fechar">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sobre Mim -->
+    <div id="janela-sobre-mim" class="janela oculta">
+        <div class="barra-titulo">
+            <span class="titulo">Sobre Mim</span>
+            <div class="botoes-titulo">
+                <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
+                <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
+                <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+            </div>
+        </div>
+
+        <div class="conteudo-janela">
+            <p>Oi! Eu sou o André Luiz, estudante de Ciência da Computação no Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro.</p>
+        </div>
+    </div>
+
+    <!-- Meus Projetos -->
+    <div id="janela-meus-projetos" class="janela oculta">
+        <div class="barra-titulo">
+            <span class="titulo">Meus Projetos</span>
+            <div class="botoes-titulo">
+                <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
+                <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
+                <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+            </div>
+        </div>
+
+        <div class="conteudo-janela">
+            <p>Aqui estão os meus projetos:</p>
+            <ul>
+                <li>Projeto 1</li>
+                <li>Projeto 2</li>
+                <li>Projeto 3</li>
+            </ul>
+            <p>Estes são alguns dos projetos que desenvolvi até agora.</p>
+        </div>
+    </div>
+
 
     <div class="barra-titulo">
         <span class="titulo">Bem-vindo</span>
