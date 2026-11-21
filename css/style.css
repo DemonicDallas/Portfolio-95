@@ -186,6 +186,7 @@ legend {
 
 #dh-mes,
 #dh-ano,
+#dh-fuso-lista,
 .dh-hora {
     font: inherit;
     /* senão, select e input usam a fonte do sistema */
@@ -280,6 +281,37 @@ legend {
 
 .dh-painel {
     min-height: 330px;
+}
+
+
+/* fuso horário: o relógio analógico e o digital ficam na mesma altura */
+
+#dh-fuso-lista {
+    width: 100%;
+    /* mesma fonte, padding e afundado do #dh-mes */
+}
+
+.dh-mapa {
+    position: relative;        /* a faixa se posiciona dentro dele */
+    margin: 10px 0;
+    line-height: 0;            /* tira o espaço embaixo da imagem */
+}
+
+.dh-mapa img {
+    width: 100%;
+}
+
+.dh-faixa {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: calc(100% / 24);    /* 24 fusos: cada um ocupa 1/24 do mapa */
+    transform: translateX(-50%);
+    background: rgba(80, 80, 255, 0.6);
+}
+
+.dh-painel {
+    min-height: 330px;         /* as duas abas com o mesmo tamanho */
 }
 
 .bandeja {

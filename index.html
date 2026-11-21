@@ -209,8 +209,28 @@
 
             <!-- aba 2: Fuso horário -->
             <div id="dh-aba-fuso" class="dh-painel oculta">
-                <p>Seu fuso horário: <b id="dh-fuso-nome">—</b></p>
-                <p id="dh-fuso-gmt">GMT</p>
+                <select id="dh-fuso-lista">
+                    <option value="-8">(GMT-08:00) Pacífico (EUA e Canadá)</option>
+                    <option value="-5">(GMT-05:00) Leste (EUA e Canadá)</option>
+                    <option value="-4">(GMT-04:00) Manaus</option>
+                    <option value="-3">(GMT-03:00) Brasília</option>
+                    <option value="0">(GMT) Londres, Lisboa</option>
+                    <option value="1">(GMT+01:00) Paris, Berlim, Roma</option>
+                    <option value="3">(GMT+03:00) Moscou</option>
+                    <option value="8">(GMT+08:00) Pequim</option>
+                    <option value="9">(GMT+09:00) Tóquio</option>
+                    <option value="10">(GMT+10:00) Sydney</option>
+                </select>
+
+                <div class="dh-mapa">
+                    <img src="img/mapa-fuso.png" alt="Mapa-múndi">
+                    <div id="dh-faixa" class="dh-faixa"></div>
+                </div>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Ajustar o relógio automaticamente para o horário de verão
+                </label>
             </div>
 
             <div class="dh-rodape">

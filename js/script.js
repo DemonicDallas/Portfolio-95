@@ -527,10 +527,23 @@ const diferenca = -new Date().getTimezoneOffset() / 60;               // -3
 const gmt = "GMT" + (diferenca >= 0 ? "+" : "") + diferenca;          // "GMT-3"
 
 document.getElementById("dh-fuso").textContent = gmt;
-document.getElementById("dh-fuso-nome").textContent = fusoNome;
-document.getElementById("dh-fuso-gmt").textContent = gmt;
 
 
+// ===== MAPA DE FUSOS =====
+const fusoLista = document.getElementById("dh-fuso-lista");
+const faixa = document.getElementById("dh-faixa");
+
+function moverFaixa(horas) {
+    const posicao = (((horas + 20.4) % 24) + 24) % 24;   // de 0 a 24, a partir da borda esquerda
+    faixa.style.left = (posicao / 24 * 100) + "%";
+}
+
+fusoLista.value = diferenca;        // começa no fuso de quem visita
+moverFaixa(diferenca);
+
+fusoLista.addEventListener("change", () => {
+    moverFaixa(Number(fusoLista.value));
+});
 
 
 // ===== MENU INICIAR =====
