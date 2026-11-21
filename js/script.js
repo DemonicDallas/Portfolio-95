@@ -197,7 +197,7 @@ botaoProximaDica.addEventListener("click", () => {
     indiceDica = (indiceDica + 1) % dicas.length;
     mostrarDica();
 });
-
+mostrarDica();
 caixaMostrar.addEventListener("change", () => {
     try {
         localStorage.setItem("mostrar-boas-vindas", caixaMostrar.checked ? "sim" : "nao");
