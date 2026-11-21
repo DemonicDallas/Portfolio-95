@@ -1,14 +1,25 @@
+// =========================================================
+// PORTFÓLIO 95 — script.js
+// Ordem: inicialização → janelas → barra de tarefas →
+// relógio → Data/Hora (calendário, abas, fuso, mapa) →
+// menu Iniciar
+// =========================================================
+
+
 // ===== FERRAMENTAS =====
+// esperar(ms): pausa a função async por ms milissegundos (usa com await)
 function esperar(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // ===== INTERRUPTORES =====
+// variáveis true/false que mudam o comportamento do site
 let somLigado = true;   // o botão de volume liga e desliga
 let pulou = false;      // vira true quando a pessoa aperta Esc
 
 
 // ===== ELEMENTOS DA PÁGINA =====
+// pega no HTML, uma vez só, os elementos que o script usa muitas vezes
 const telaLigar = document.getElementById("tela-ligar");
 const telaBios = document.getElementById("tela-bios");
 const telaPreta = document.getElementById("tela-preta");
@@ -24,6 +35,7 @@ const caixaMostrar = document.getElementById("bv-mostrar");
 const barraDeTarefas = document.querySelector(".barra-de-tarefas");
 const somInicio = document.getElementById("som-inicio");
 const somClique = document.getElementById("som-clique");
+// volume dos sons (de 0 a 1)
 somInicio.volume = 0.1;
 somClique.volume = 0.2;
 const calendario = document.getElementById("dh-calendario");
@@ -31,6 +43,7 @@ const analogico = document.getElementById("dh-analogico");
 
 
 // ===== TEXTOS DA BIOS =====
+// as linhas que aparecem antes e depois do teste de memória
 const linhasAntes = [
     "Award Modular BIOS v4.51PG, An Energy Star Ally",
     "Copyright (C) 1984-95, Award Software, Inc.",
@@ -48,6 +61,7 @@ const linhasDepois = [
     "Starting Windows 95..."
 ];
 
+// as dicas da janela de boas-vindas
 const dicas = [
     "Bem-vindo ao meu portfólio!",
     "Clique duas vezes em Meus Projetos para ver o que eu já desenvolvi.",
@@ -57,8 +71,9 @@ const dicas = [
     "Na próxima vez que acessar meu site, pressione Esc e pule a inicialização completamente."
 ];
 
-// ===== TOCAR O SOM DE INÍCIO (só se o som estiver ligado) =====
-// NOVO: uma função só, usada no fim da sequência e no Esc
+// ===== TOCAR O SOM DE INÍCIO =====
+// toca o som do Windows, só se o volume estiver ligado
+// (usada no fim da inicialização e quando aperta Esc)
 function tocarSomInicio() {
     if (!somLigado) return;
     somInicio.play().catch(() => {
@@ -67,7 +82,8 @@ function tocarSomInicio() {
 }
 
 // ===== MOSTRAR A ÁREA DE TRABALHO =====
-// NOVO: esconde todas as telas de boot e mostra os ícones e a barra
+// esconde todas as telas de boot, mostra os ícones e a barra,
+// abre as boas-vindas e deixa o cursor de "carregando" por 3 segundos
 function terminarInicializacao() {
     pulou = true;
     const telas = document.querySelectorAll(".tela-boot");
@@ -91,19 +107,21 @@ function terminarInicializacao() {
 
 
 // ===== A SEQUÊNCIA DE INICIALIZAÇÃO =====
+// BIOS → tela preta → carregamento → área de trabalho
+// depois de cada espera, "if (pulou) return" para tudo se a pessoa apertou Esc
 async function iniciar() {
     // 1. troca a tela de ligar pela BIOS
     telaLigar.classList.add("oculta");
     telaBios.classList.remove("oculta");
     await esperar(1000);
-    if (pulou) return;   // NOVO
+    if (pulou) return;
 
     // 2. as linhas de antes da memória
     for (const linha of linhasAntes) {
         biosTexto.textContent += linha + "\n";
         const pausa = Math.random() * (1000 - 300) + 300;
         await esperar(pausa);
-        if (pulou) return;   // NOVO
+        if (pulou) return;
     }
 
     // 3. o teste de memória
@@ -112,52 +130,54 @@ async function iniciar() {
     for (let memoria = 1024; memoria <= 16384; memoria += 1024) {
         biosTexto.textContent = textoAntes + "Memory Test: " + memoria + "K";
         await esperar(60);
-        if (pulou) return;   // NOVO
+        if (pulou) return;
     }
 
     biosTexto.textContent = textoAntes + "Memory Test: 16384K OK\n";
     await esperar(500);
-    if (pulou) return;   // NOVO
+    if (pulou) return;
 
     // 4. as linhas de depois da memória
     for (const linha of linhasDepois) {
         biosTexto.textContent += linha + "\n";
         const pausa = Math.random() * (1000 - 300) + 300;
         await esperar(pausa);
-        if (pulou) return;   // NOVO
+        if (pulou) return;
     }
 
     // 5. troca a BIOS pela tela preta
     telaBios.classList.add("oculta");
     telaPreta.classList.remove("oculta");
     await esperar(2000);
-    if (pulou) return;   // NOVO
+    if (pulou) return;
 
     // 6. troca a tela preta pela tela de carregamento
     telaPreta.classList.add("oculta");
     telaSplash.classList.remove("oculta");
     await esperar(5000);
-    if (pulou) return;   // NOVO
+    if (pulou) return;
 
     // 7. tira a tela de carregamento: fica só o fundo, com a ampulheta
     telaSplash.classList.add("oculta");
     document.body.classList.add("carregando");
     await esperar(2000);
-    if (pulou) return;   // NOVO
+    if (pulou) return;
 
     // 8. aparecem os ícones e a barra, e toca o som
-    terminarInicializacao();   // NOVO: reaproveita a função
-    tocarSomInicio();          // NOVO: só toca se o som estiver ligado
+    terminarInicializacao();
+    tocarSomInicio();
 }
 
 // ===== QUANDO CLICAR EM LIGAR =====
+// começa a inicialização
 botaoLigar.addEventListener("click", () => {
     iniciar();
 });
 
 // ===== QUANDO APERTAR ESC =====
+// pula a inicialização e vai direto para a área de trabalho
 document.addEventListener("keydown", (evento) => {
-    if (evento.key === "Escape" && !pulou) {   // NOVO: "&& !pulou" evita pular duas vezes
+    if (evento.key === "Escape" && !pulou) {   // "&& !pulou" evita pular duas vezes
         pulou = true;
         terminarInicializacao();
         tocarSomInicio();
@@ -165,6 +185,7 @@ document.addEventListener("keydown", (evento) => {
 });
 
 // ===== QUANDO CLICAR EM QUALQUER BOTÃO =====
+// toca o som de clique (se o volume estiver ligado)
 document.addEventListener("pointerdown", (evento) => {
     const botao = evento.target.closest("button");
     if (!botao) return;
@@ -174,12 +195,14 @@ document.addEventListener("pointerdown", (evento) => {
 });
 
 // ===== QUANDO CLICAR NO VOLUME =====
+// liga e desliga todos os sons
 botaoVolume.addEventListener("click", () => {
     somLigado = !somLigado;
     console.log("som ligado?", somLigado);
 });
 
 // ===== QUANDO CLICAR EM UM BOTÃO DE FECHAR =====
+// qualquer botão com a classe .botao-fechar fecha a janela onde ele está
 document.addEventListener("click", (evento) => {
     const botao = evento.target.closest(".botao-fechar");
     if (!botao) return;
@@ -189,7 +212,7 @@ document.addEventListener("click", (evento) => {
 });
 
 // ===== QUANDO CLICAR EM UMA JANELA =====
-
+// a janela clicada vem para a frente
 document.addEventListener("pointerdown", (evento) => {
     const janela = evento.target.closest(".janela");
     if (!janela) return;
@@ -199,7 +222,8 @@ document.addEventListener("pointerdown", (evento) => {
 
 
 
-// ===== QUANDO ABRIR UMA JANELA =====
+// ===== ABRIR UMA JANELA =====
+// mostra a janela, cria o botão dela na barra (se ainda não tiver) e traz para a frente
 function abrirJanela(janela) {
     janela.classList.remove("oculta");
     if (!acharBotaoTarefa(janela)) {
@@ -208,7 +232,8 @@ function abrirJanela(janela) {
     ativarJanela(janela);
 }
 
-// ===== QUANDO FECHAR UMA JANELA =====
+// ===== FECHAR UMA JANELA =====
+// esconde a janela e apaga o botão dela na barra
 function fecharJanela(janela) {
     janela.classList.add("oculta");
     const botao = acharBotaoTarefa(janela);
@@ -217,7 +242,8 @@ function fecharJanela(janela) {
     }
 }
 
-// ===== Sessão de dicas sendo mostradas na janela de boas-vindas =====
+// ===== DICAS DA JANELA DE BOAS-VINDAS =====
+// começa numa dica sorteada; "Próxima dica" passa para a seguinte (e volta ao início)
 let indiceDica = Math.floor(Math.random() * dicas.length);
 
 function mostrarDica() {
@@ -229,6 +255,7 @@ botaoProximaDica.addEventListener("click", () => {
     mostrarDica();
 });
 mostrarDica();
+// lembra (no localStorage) se a caixa "Mostrar esta tela" foi desmarcada
 caixaMostrar.addEventListener("change", () => {
     try {
         localStorage.setItem("mostrar-boas-vindas", caixaMostrar.checked ? "sim" : "nao");
@@ -243,6 +270,7 @@ try {
 
 
 // ===== ARRASTAR JANELAS =====
+// segura pela barra de título (pointerdown), move (pointermove), solta (pointerup)
 let janelaArrastada = null;   // a janela que está sendo segurada
 let difX = 0;                 // onde, dentro da janela, o mouse pegou
 let difY = 0;
@@ -274,6 +302,7 @@ document.addEventListener("pointerup", () => {
 
 
 // ===== QUANDO DER DOIS CLIQUES (ÍCONES E RELÓGIO) =====
+// abre a janela do ícone, ou a Data/Hora se for o relógio
 document.addEventListener("dblclick", (evento) => {
     // dois cliques no relógio → Data/Hora
     if (evento.target.closest(".relogio")) {
@@ -288,7 +317,8 @@ document.addEventListener("dblclick", (evento) => {
 
 
 
-// ====== TRAZER UMA JANELA PARA A FRENTE ======
+// ===== TRAZER UMA JANELA PARA A FRENTE =====
+// barra azul só na janela ativa, z-index maior e botão da barra afundado
 let zTopo = 10; // É o mesmo index do inicio que eu tinha colocado, porém, agora é uma variável que vai aumentando a cada clique em uma janela
 
 function ativarJanela(janela) {
@@ -314,7 +344,8 @@ function ativarJanela(janela) {
     acharBotaoTarefa(janela).classList.add("ativo");
 }
 
-// ===== QUANDO MINIMIZAR UMA JANELA =====
+// ===== MINIMIZAR E MAXIMIZAR =====
+// minimizar: esconde a janela, mas o botão dela fica na barra
 function minimizarJanela(janela) {
     // 1. a janela some (mesma classe do fechar)
     janela.classList.add("oculta");
@@ -324,11 +355,13 @@ function minimizarJanela(janela) {
     acharBotaoTarefa(janela).classList.remove("ativo");
 }
 
+// maximizar: liga e desliga a classe .maximizada (tela cheia)
 function maximizarJanela(janela) {
     janela.classList.toggle("maximizada");
 }
 
 // ===== ABRIR UMA JANELA PELO NOME =====
+// abrirPorNome("data-hora") abre a #janela-data-hora
 function abrirPorNome(nome) {
     const janela = document.getElementById("janela-" + nome);
     if (!janela) return;
@@ -336,6 +369,7 @@ function abrirPorNome(nome) {
 }
 
 // ===== BOTÕES DA BARRA DE TAREFAS =====
+// criar o botão de uma janela e achar o botão de uma janela
 const janelasAbertas = document.querySelector(".janelas-abertas");
 
 function criarBotaoTarefa(janela) {
@@ -353,6 +387,7 @@ function acharBotaoTarefa(janela) {
 
 
 // ===== QUANDO CLICAR EM UM BOTÃO DA BARRA DE TAREFAS =====
+// minimizada → volta / atrás de outra → vem para a frente / na frente → minimiza
 document.addEventListener("click", (evento) => {
     const botao = evento.target.closest(".botao-tarefa");
     if (!botao) return;
@@ -372,6 +407,7 @@ document.addEventListener("click", (evento) => {
 });
 
 // ===== QUANDO CLICAR EM UM BOTÃO DE MINIMIZAR =====
+// o botão _ da barra de título
 document.addEventListener("click", (evento) => {
     const botao = evento.target.closest(".botao-minimizar");
     if (!botao) return;
@@ -381,6 +417,7 @@ document.addEventListener("click", (evento) => {
 });
 
 // ===== QUANDO CLICAR EM UM BOTÃO DE MAXIMIZAR =====
+// o botão □ da barra de título
 document.addEventListener("click", (evento) => {
     const botao = evento.target.closest(".botao-maximizar");
     if (!botao) return;
@@ -390,6 +427,7 @@ document.addEventListener("click", (evento) => {
 });
 
 // ===== QUANDO CLICAR EM UM ITEM DO MENU =====
+// abre a janela do item (se ele tiver data-janela) e fecha o menu
 document.addEventListener("click", (evento) => {
     const item = evento.target.closest(".menu-item");
     if (!item) return;                       // não clicou em item nenhum
@@ -401,6 +439,8 @@ document.addEventListener("click", (evento) => {
 
 
 // ===== RELÓGIO =====
+// atualiza a cada segundo: a hora da barra, a data no "title",
+// a hora digital e os ponteiros da janela Data/Hora
 const relogio = document.querySelector(".relogio");
 const dhHora = document.getElementById("dh-hora");
 const ponteiroSeg = document.getElementById("ponteiro-seg");
@@ -452,6 +492,7 @@ for (let i = 0; i < 60; i++) {
 }
 
 // ===== CALENDÁRIO =====
+// monta os dias do mês escolhido e pinta o dia de hoje de azul
 const selMes = document.getElementById("dh-mes");
 const inpAno = document.getElementById("dh-ano");
 
@@ -505,23 +546,28 @@ selMes.addEventListener("change", redesenharCalendario);
 inpAno.addEventListener("input", redesenharCalendario);
 
 
-// ===== ABAS =====
+// ===== ABAS (servem para qualquer janela) =====
 document.addEventListener("click", (evento) => {
     const aba = evento.target.closest(".aba");
     if (!aba) return;
 
-    for (const outra of document.querySelectorAll(".aba")) {
+    const janela = aba.closest(".janela");   // a janela onde esta aba está
+
+    // só as abas DESTA janela perdem o "ativa"
+    for (const outra of janela.querySelectorAll(".aba")) {
         outra.classList.remove("ativa");
     }
     aba.classList.add("ativa");
 
-    for (const painel of document.querySelectorAll(".dh-painel")) {
+    // só os painéis DESTA janela somem
+    for (const painel of janela.querySelectorAll(".painel")) {
         painel.classList.add("oculta");
     }
-    document.getElementById("dh-aba-" + aba.dataset.aba).classList.remove("oculta");
+    document.getElementById(aba.dataset.aba).classList.remove("oculta");
 });
 
 // ===== FUSO HORÁRIO =====
+// descobre o fuso de quem visita e escreve "GMT-3" na aba Data e hora
 const fusoNome = Intl.DateTimeFormat().resolvedOptions().timeZone;   // "America/Sao_Paulo"
 const diferenca = -new Date().getTimezoneOffset() / 60;               // -3
 const gmt = "GMT" + (diferenca >= 0 ? "+" : "") + diferenca;          // "GMT-3"
@@ -530,6 +576,8 @@ document.getElementById("dh-fuso").textContent = gmt;
 
 
 // ===== MAPA DE FUSOS =====
+// move a faixa azul para o fuso escolhido na lista
+// (o mapa começa no GMT+3,6, por isso o + 20.4)
 const fusoLista = document.getElementById("dh-fuso-lista");
 const faixa = document.getElementById("dh-faixa");
 
@@ -545,8 +593,52 @@ fusoLista.addEventListener("change", () => {
     moverFaixa(Number(fusoLista.value));
 });
 
+// ===== MEUS PROJETOS (EXPLORER) =====
+// dois cliques numa pasta abrem a página do projeto; Voltar volta para a pasta
+const exPasta = document.getElementById("ex-pasta");
+const exVoltar = document.getElementById("ex-voltar");
+const exEndereco = document.getElementById("ex-endereco");
+const exStatus = document.getElementById("ex-status");
+
+function abrirProjeto(nome) {
+    // 1. esconde a pasta e todas as páginas
+    exPasta.classList.add("oculta");
+    for (const pagina of document.querySelectorAll(".ex-projeto")) {
+        pagina.classList.add("oculta");
+    }
+
+    // 2. mostra só a página deste projeto
+    const pagina = document.getElementById("proj-" + nome);
+    pagina.classList.remove("oculta");
+
+    // 3. atualiza o endereço, o Voltar e a barra de status
+    exEndereco.textContent = "C:\\Meus Projetos\\" + nome;
+    exVoltar.disabled = false;
+    exStatus.textContent = pagina.querySelector("h2").textContent;
+}
+
+function voltarPasta() {
+    for (const pagina of document.querySelectorAll(".ex-projeto")) {
+        pagina.classList.add("oculta");
+    }
+    exPasta.classList.remove("oculta");
+
+    exEndereco.textContent = "C:\\Meus Projetos";
+    exVoltar.disabled = true;
+    exStatus.textContent = "4 objeto(s)";
+}
+
+// dois cliques num ícone de projeto → abre a página dele
+document.addEventListener("dblclick", (evento) => {
+    const item = evento.target.closest(".ex-item");
+    if (!item) return;
+    abrirProjeto(item.dataset.projeto);
+});
+
+exVoltar.addEventListener("click", voltarPasta);
 
 // ===== MENU INICIAR =====
+// abre e fecha pelo botão Iniciar; fecha com Esc ou clicando fora
 const menuIniciar = document.getElementById("menu-iniciar");
 const botaoStart = document.querySelector(".botao-start");
 

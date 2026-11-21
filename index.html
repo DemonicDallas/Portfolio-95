@@ -2,38 +2,50 @@
 <html lang="pt-BR">
 
 <head>
+    <!-- ===== CABEÇALHO: título da aba, CSS, JS e ícone ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio-95</title>
 
-    <link rel="stylesheet" href="css/style.css?v=7">
-    <script src="js/script.js?v=7" defer></script>
+    <!-- o ?v=N obriga o navegador a baixar a versão nova (aumente a cada commit) -->
+    <link rel="stylesheet" href="css/style.css?v=8">
+    <!-- defer: o script só roda depois que o HTML inteiro carregou -->
+    <script src="js/script.js?v=8" defer></script>
     <link rel="icon" href="img/icones/windows-plus-my-computer.png">
 
 </head>
 
 <body>
-    <!-- ===== INICIALIZAÇÃO DA BIOS ===== -->
+    <!-- ===== TELAS DE INICIALIZAÇÃO ===== -->
+    <!-- aparecem uma depois da outra: ligar → BIOS → tela preta → carregamento -->
+
+    <!-- 1. o botão "ligar o computador" -->
     <div id="tela-ligar" class="tela-boot">
         <button id="botao-ligar" type="button">⏻ ligar o computador </button>
     </div>
 
+    <!-- 3. a tela preta entre a BIOS e o carregamento -->
     <div id="tela-preta" class="tela-boot oculta"></div>
 
+    <!-- 2. a BIOS: o JS escreve o texto dentro do <pre> -->
     <div id="tela-bios" class="tela-boot oculta">
         <pre id="bios-texto"></pre>
     </div>
 
+    <!-- 4. a tela de carregamento do Portfólio 95 -->
     <div id="tela-splash" class="tela-boot oculta">
         <img class="splash-imagem" src="img/portfolio95-splash-animado.webp" alt="">
         <div class="barra-progresso"></div>
     </div>
 
+    <!-- ===== SONS ===== -->
+    <!-- o som de quando o Windows termina de iniciar e o clique dos botões -->
     <audio id="som-inicio" src="sons/inicio.wav" preload="auto"></audio>
     <audio id="som-clique" src="sons/mouse-clique.mp3" preload="auto"></audio>
 
 
-    <!-- ===== Área de Trabalho ===== -->
+    <!-- ===== ÁREA DE TRABALHO ===== -->
+    <!-- os ícones: o data-janela diz qual janela cada um abre (janela-...) -->
 
     <main class="area-de-trabalho oculta">
         <button class="icone" type="button" data-janela="meu-computador">
@@ -81,8 +93,10 @@
     </main>
 
     <!-- ===== JANELAS ===== -->
+    <!-- todas seguem o mesmo modelo: .barra-titulo (título + botões)
+         e .conteudo-janela (o que vai dentro) -->
 
-    <!-- Boas-vindas -->
+    <!-- Boas-vindas: abre sozinha ao iniciar e mostra as dicas -->
     <div id="janela-boas-vindas" class="janela oculta">
         <div class="barra-titulo">
             <span class="titulo">Bem-vindo</span>
@@ -118,19 +132,90 @@
         <div class="barra-titulo">
             <span class="titulo">Sobre Mim</span>
             <div class="botoes-titulo">
-                <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
-                <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
+                <button class="botao-ajuda" type="button" aria-label="Ajuda">?</button>
                 <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
             </div>
         </div>
 
         <div class="conteudo-janela">
-            <p>Oi! Eu sou o André Luiz, estudante de Ciência da Computação no Instituto Federal de Educação, Ciência e
-                Tecnologia do Triângulo Mineiro.</p>
+            <div class="abas">
+                <button class="aba ativa" type="button" data-aba="sm-geral">Geral</button>
+                <button class="aba" type="button" data-aba="sm-formacao">Formação</button>
+                <button class="aba" type="button" data-aba="sm-habilidades">Habilidades</button>
+            </div>
+
+            <!-- aba 1: Geral -->
+            <div id="sm-geral" class="painel sm-painel">
+                <div class="sm-geral">
+                    <img src="img/icones/windows-plus-my-computer.png" alt="" class="sm-foto">
+                    <div class="sm-info">
+                        <p>Sistema:</p>
+                        <p class="sm-recuo">Portfólio 95<br>versão 4.00.950</p>
+                        <p>Registrado para:</p>
+                        <p class="sm-recuo">André Luiz Dias Moreira<br>Ciência da Computação<br>IFTM, Campus Ituiutaba
+                        </p>
+                        <p>Computador:</p>
+                        <p class="sm-recuo">Pentium(r) 133MHz<br>16,0 MB de RAM</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- aba 2: Formação -->
+            <div id="sm-formacao" class="painel sm-painel oculta">
+                <fieldset>
+                    <legend>Graduação</legend>
+                    <p>Bacharelado em Ciência da Computação, Instituto Federal de Educação, Ciência e Tecnologia do
+                        Triângulo Mineiro (IFTM), Campus Ituiutaba (em andamento)</p>
+                </fieldset>
+                <fieldset>
+                    <legend>Pesquisa e extensão</legend>
+                    <p>PIBIC/IFTM (2025-2026) desenvolvimento do projeto: <i>Dados e voz codificados em sinais
+                            eletromagnéticos</i>. Orientador: Prof. Marcelo Loures Ribeiro.</p>
+                    <p>Bolsista FAPEMIG (2026-2027) Treinamento de um sistema para selecionar vagas de estágio aos
+                        estudantes na área da TI. Orientadora: Profª. Reane Franco Goulart.</p>
+                </fieldset>
+            </div>
+
+            <!-- aba 3: Habilidades -->
+            <div id="sm-habilidades" class="painel sm-painel oculta">
+                <!-- as duas caixas lado a lado (mesmo CSS das caixas Data e Hora) -->
+                <div class="dh-colunas">
+                    <fieldset>
+                        <legend>Linguagens e ferramentas</legend>
+                        <ul class="sm-lista">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>Python</li>
+                            <li>Java</li>
+                            <li>C</li>
+                            <li>Git e GitHub</li>
+                            <li>Octave</li>
+                            <li>MySQL</li>
+                            <li>Linux</li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Idiomas</legend>
+                        <ul class="sm-lista">
+                            <li>Português (nativo)</li>
+                            <li>Inglês (intermediário)</li>
+                            <li>Espanhol (básico)</li>
+                            <li>Japonês (básico)</li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="dh-rodape">
+                <button type="button" class="botao-fechar">OK</button>
+                <button type="button" class="botao-fechar">Cancelar</button>
+            </div>
         </div>
     </div>
 
-    <!-- Meus Projetos -->
+    <!-- Meus Projetos: uma pasta do Explorer -->
     <div id="janela-meus-projetos" class="janela oculta">
         <div class="barra-titulo">
             <span class="titulo">Meus Projetos</span>
@@ -141,18 +226,223 @@
             </div>
         </div>
 
-        <div class="conteudo-janela">
-            <p>Aqui estão os meus projetos:</p>
-            <ul>
-                <li>Projeto 1</li>
-                <li>Projeto 2</li>
-                <li>Projeto 3</li>
-            </ul>
-            <p>Estes são alguns dos projetos que desenvolvi até agora.</p>
+        <!-- barra de menus (só enfeite) -->
+        <div class="ex-menu">
+            <span><u>A</u>rquivo</span>
+            <span><u>E</u>ditar</span>
+            <span>E<u>x</u>ibir</span>
+            <span>Aj<u>u</u>da</span>
         </div>
+
+        <!-- barra de ferramentas: Voltar e o endereço -->
+        <div class="ex-ferramentas">
+            <button id="ex-voltar" type="button" disabled>◄ Voltar</button>
+            <div class="ex-endereco" id="ex-endereco">C:\Meus Projetos</div>
+        </div>
+
+        <div class="ex-corpo">
+            <!-- painel da esquerda -->
+            <aside class="ex-painel">
+                <fieldset>
+                    <legend>Links</legend>
+                    <a href="https://github.com/DemonicDallas" target="_blank">Meu GitHub</a>
+                    <a href="https://www.linkedin.com/in/andre.demonicdallas.paocomovo@gmail.com" target="_blank">Meu
+                        LinkedIn</a>
+                    <a href="mailto:andreluizd1717@gmail.com">Meu e-mail</a>
+                </fieldset>
+                <fieldset>
+                    <legend>Detalhes</legend>
+                    <p id="ex-detalhes">Clique em um projeto para ver os detalhes.</p>
+                </fieldset>
+            </aside>
+
+            <div class="ex-conteudo">
+                <!-- TELA 1: a pasta com os ícones -->
+                <div id="ex-pasta">
+                    <p class="ex-grupo">Concluídos</p>
+                    <div class="ex-icones">
+                        <button class="ex-item" type="button" data-projeto="farmastock"
+                            data-descricao="Sistema de farmácia em Python e MySQL.">
+                            <img src="img/icones/windows-plus-folder.png" alt="">
+                            <span>FarmaStock</span>
+                        </button>
+                        <button class="ex-item" type="button" data-projeto="pokedex"
+                            data-descricao="Pokédex com dados de uma API.">
+                            <img src="img/icones/windows-plus-folder.png" alt="">
+                            <span>Pokédex</span>
+                        </button>
+                        <button class="ex-item" type="button" data-projeto="sensores"
+                            data-descricao="Sensores de gases com Arduino.">
+                            <img src="img/icones/windows-plus-folder.png" alt="">
+                            <span>Sensores de gases</span>
+                        </button>
+                        <button class="ex-item" type="button" data-projeto="portfolio95"
+                            data-descricao="Este site! Em andamento.">
+                            <img src="img/icones/windows-plus-folder.png" alt="">
+                            <span>Portfólio 95</span>
+                        </button>
+                    </div>
+
+                    <p class="ex-grupo">Em breve</p>
+                    <ul class="ex-breve">
+                        <li>Visualizador de algoritmos</li>
+                        <li>Shell ou servidor HTTP em C</li>
+                        <li>Análise de dados públicos brasileiros</li>
+                        <li>Interpretador de uma linguagem simples</li>
+                        <li>Classificador com machine learning</li>
+                    </ul>
+                </div>
+
+                <!-- TELA 2: as páginas dos projetos (uma de cada vez) -->
+                <article id="proj-farmastock" class="ex-projeto oculta">
+                    <h2>FarmaStock: sistema de farmácia</h2>
+                   <p class="ex-data">06/2026 · Engenharia de Software I</p>
+                    <div class="ex-tecnologias">
+                        <span class="ex-tec">Figma</span>
+                        <span class="ex-tec">HTML</span>
+                        <span class="ex-tec">CSS</span>
+                        <span class="ex-tec">JavaScript</span>
+                        <span class="ex-tec">Python</span>
+                        <span class="ex-tec">MySQL</span>
+                    </div>
+                    <h3>Contexto</h3>
+                    <p>Trabalho em grupo de Engenharia de Software I: um sistema web para uma farmácia controlar
+                        estoque, vendas e cadastros (clientes, funcionários, fornecedores e laboratórios), com alertas
+                        de estoque baixo e de vencimento e relatórios financeiros.</p>
+                    <h3>O que eu fiz</h3>
+                    <p>Fiquei responsável pelo design e pelo front-end:</p>
+                    <ul>
+                        <li>Desenhei as telas do sistema no Figma</li>
+                        <li>Implementei as 11 telas em HTML, CSS e JavaScript, do login aos relatórios</li>
+                        <li>Criei a navegação do menu sem recarregar a página: o JavaScript busca cada tela com fetch e
+                            mostra no centro</li>
+                        <li>Fiz a tela de alertas, que separa os remédios vencidos, os próximos do vencimento e os com
+                            estoque baixo, com filtros</li>
+                        <li>Validei os formulários, como a senha de funcionário com no mínimo 8 caracteres e a
+                            confirmação</li>
+                    </ul>
+                    <h3>Design</h3>
+                    <p>Telas que eu desenhei no Figma:</p>
+                    <div class="ex-prints">
+                        <img class="ex-print" src="img/projetos/farmastock-login.png"
+                            alt="Tela de login do PharmaStock">
+                        <img class="ex-print" src="img/projetos/farmastock-clientes.png"
+                            alt="Lista de clientes do PharmaStock">
+                        <img class="ex-print" src="img/projetos/farmastock-formulario.png"
+                            alt="Formulário de cadastro de cliente do PharmaStock">
+                    </div>
+                </article>
+
+                <article id="proj-pokedex" class="ex-projeto oculta">
+                    <h2>Pokédex</h2>
+                    <p class="ex-data">07/2026 · Programação Web I</p>
+                    <div class="ex-tecnologias">
+                        <span class="ex-tec">React</span>
+                        <span class="ex-tec">CSS</span>
+                        <span class="ex-tec">JavaScript</span>
+                        <span class="ex-tec">PokeAPI</span>
+                        <span class="ex-tec">Figma</span>
+                    </div>
+                    <h3>Contexto</h3>
+                    <p>Atividade de programação web para criar uma Pokédex interativa utilizando conceitos de React e
+                        implementação da API PokeAPI.</p>
+                    <h3>O que eu fiz</h3>
+                    <ul>
+                        <li>Tela de listagem com os 24 primeiros pokémons da Pokédex (mínimo de 20 exigido pelo
+                            trabalho).</li>
+                        <li>Card colorido de acordo com o tipo primário do pokémon.</li>
+                        <li>Busca por nome ou número diretamente na lista carregada.</li>
+                        <li>Tela de detalhe acessada ao clicar em um card, exibindo:
+                            <ul>
+                                <li>sprite em tamanho maior, nome, número, tipos e espécie</li>
+                                <li>altura e peso</li>
+                                <li>cadeia de evoluções (com navegação entre elas)</li>
+                                <li>status base (HP, Attack, Defense, Sp. Atk, Sp. Def, Speed) em barras de progresso
+                                    visuais</li>
+                                <li>habilidades</li>
+                                <li>fraquezas (calculadas a partir dos tipos do pokémon)</li>
+                            </ul>
+                        </li>
+                        <li>Navegação entre lista e detalhe (com botão "Voltar" e link "Home").</li>
+                        <li>Tratamento de estados de loading e erro nas requisições à API.</li>
+                    </ul>
+                    <a class="ex-repo" href="https://github.com/DemonicDallas/pokedex" target="_blank">Ver o
+                        repositório</a>
+                    <h3>Design</h3>
+                    <p>Telas desenhadas no Figma:</p>
+                    <div class="ex-prints">
+                        <img class="ex-print" src="img/projetos/pokedex-lista.png" alt="Tela de lista da Pokédex">
+                        <img class="ex-print" src="img/projetos/pokedex-detalhe.png" alt="Tela de detalhe da Pokédex">
+                    </div>
+                </article>
+
+                <article id="proj-sensores" class="ex-projeto oculta">
+                    <h2>Sensores de gases</h2>
+                    <p class="ex-data">12/2022 · Projeto Integrador Extensionista II</p>
+                    <div class="ex-tecnologias">
+                        <span class="ex-tec">Arduino</span>
+                        <span class="ex-tec">ESP8266</span>
+                        <span class="ex-tec">C++</span>
+                        <span class="ex-tec">Firebase</span>
+                        <span class="ex-tec">React</span>
+                        <span class="ex-tec">Chart.js</span>
+                    </div>
+                    <h3>Contexto</h3>
+                    <p>Trabalho em grupo: um sistema de Internet das Coisas para monitorar gases tóxicos em casa.
+                        Sensores ligados a um Arduino detectam gás de cozinha, monóxido de carbono e fumaça, e um módulo
+                        ESP8266 envia as leituras pelo Wi-Fi para o Firebase. Um painel web mostra os dados em tempo
+                        real, com alerta de vazamento, gráficos e relatórios.</p>
+                    <h3>O que eu fiz</h3>
+                    <p>Fiquei responsável pelo hardware: a montagem do circuito e a programação do Arduino.</p>
+                    <ul>
+                        <li>Montei o circuito com os sensores de gás MQ-2, MQ-8 e MQ-9 ligados ao Arduino e ao módulo
+                            ESP8266</li>
+                        <li>Programei o Arduino para ler os três sensores a cada segundo e calcular os níveis de gás de
+                            cozinha, monóxido de carbono e fumaça</li>
+                        <li>Criei a detecção de vazamento: quando algum sensor passa do limite, o sistema marca o alerta
+                        </li>
+                        <li>Fiz o envio das leituras do Arduino para o ESP8266 pela comunicação serial, de onde vão para
+                            o Firebase</li>
+                        <li>Calibrei o sensor MQ-2 com as curvas do datasheet</li>
+                    </ul>
+                    <a class="ex-repo" href="https://github.com/klebersonfialhobaleeiro/toxic-gas-monitoring"
+                        target="_blank">Ver o repositório</a>
+                </article>
+
+                <article id="proj-portfolio95" class="ex-projeto oculta">
+                    <h2>Portfólio 95</h2>
+                    <p class="ex-data">2026 · Projeto pessoal (em andamento)</p>
+                    <div class="ex-tecnologias">
+                        <span class="ex-tec">HTML</span>
+                        <span class="ex-tec">CSS</span>
+                        <span class="ex-tec">JavaScript</span>
+                        <span class="ex-tec">GitHub Pages</span>
+                    </div>
+                    <h3>Contexto</h3>
+                    <p>Um portfólio que imita o Windows 95. Em vez de uma página comum, quem visita "liga o computador",
+                        passa pela BIOS e pela tela de carregamento e chega a uma área de trabalho com janelas de
+                        verdade. Tudo feito sem bibliotecas.</p>
+                    <h3>O que eu fiz</h3>
+                    <ul>
+                        <li>Inicialização animada (BIOS, teste de memória e tela de carregamento), com atalho Esc para
+                            pular</li>
+                        <li>Janelas que abrem, arrastam, minimizam, maximizam e vêm para a frente, com botões na barra
+                            de tarefas</li>
+                        <li>Menu Iniciar, relógio e sons que podem ser desligados</li>
+                        <li>Propriedades de Data/Hora com calendário, relógio analógico e mapa de fusos horários</li>
+                        <li>Visual do Win95 feito só com CSS (bordas em relevo com box-shadow)</li>
+                    </ul>
+                    <a class="ex-repo" href="https://github.com/DemonicDallas/Portfolio-95" target="_blank">Ver o
+                        repositório</a>
+                </article>
+            </div>
+        </div>
+
+        <!-- barra de status -->
+        <div class="ex-status" id="ex-status">4 objeto(s)</div>
     </div>
 
-    <!-- Data/Hora -->
+    <!-- Data/Hora: abre com dois cliques no relógio -->
     <div id="janela-data-hora" class="janela oculta">
         <div class="barra-titulo">
             <span class="titulo">Propriedades de Data/Hora</span>
@@ -163,14 +453,15 @@
         </div>
 
         <div class="conteudo-janela">
-            <!-- as abas -->
+            <!-- as abas: o data-aba diz qual painel cada uma mostra -->
             <div class="abas">
-                <button class="aba ativa" type="button" data-aba="data">Data e hora</button>
-                <button class="aba" type="button" data-aba="fuso">Fuso horário</button>
+                <button class="aba ativa" type="button" data-aba="dh-aba-data">Data e hora</button>
+                <button class="aba" type="button" data-aba="dh-aba-fuso">Fuso horário</button>
             </div>
 
+
             <!-- aba 1: Data e hora -->
-            <div id="dh-aba-data" class="dh-painel">
+            <div id="dh-aba-data" class="painel dh-painel">
                 <div class="dh-colunas">
                     <fieldset>
                         <legend><u>D</u>ata</legend>
@@ -204,11 +495,13 @@
                         <p id="dh-hora" class="dh-hora">12:00:00</p>
                     </fieldset>
                 </div>
+                <!-- o JS troca o GMT-3 pelo fuso de quem visita -->
                 <p>Fuso horário atual: <span id="dh-fuso">GMT-3</span></p>
             </div>
 
             <!-- aba 2: Fuso horário -->
-            <div id="dh-aba-fuso" class="dh-painel oculta">
+            <div id="dh-aba-fuso" class="painel dh-painel oculta">
+                <!-- a lista de fusos: o value é a diferença em horas para Greenwich -->
                 <select id="dh-fuso-lista">
                     <option value="-8">(GMT-08:00) Pacífico (EUA e Canadá)</option>
                     <option value="-5">(GMT-05:00) Leste (EUA e Canadá)</option>
@@ -222,6 +515,7 @@
                     <option value="10">(GMT+10:00) Sydney</option>
                 </select>
 
+                <!-- o mapa e a faixa azul do fuso escolhido (o JS move a faixa) -->
                 <div class="dh-mapa">
                     <img src="img/mapa-fuso.png" alt="Mapa-múndi">
                     <div id="dh-faixa" class="dh-faixa"></div>
@@ -233,6 +527,7 @@
                 </label>
             </div>
 
+            <!-- OK e Cancelar fecham a janela; Aplicar fica desativado -->
             <div class="dh-rodape">
                 <button type="button" class="botao-fechar">OK</button>
                 <button type="button" class="botao-fechar">Cancelar</button>
@@ -241,14 +536,18 @@
         </div>
     </div>
 
+    <!-- ===== BARRA DE TAREFAS ===== -->
+    <!-- Iniciar à esquerda, botões das janelas abertas no meio, bandeja à direita -->
     <footer class="barra-de-tarefas oculta">
         <button class="botao-start" type="button">
             <img src="img/icones/icon-windows.jpg" alt="">
             <span>Iniciar</span>
         </button>
 
+        <!-- o JS cria aqui um botão para cada janela aberta -->
         <div class="janelas-abertas"></div>
 
+        <!-- a bandeja: volume e relógio -->
         <div class="bandeja">
             <button id="botao-volume" class="botao-volume" type="button">
                 <img src="img/icones/windows-volume-control.png" alt="Som ligado">
@@ -257,7 +556,8 @@
         </div>
     </footer>
 
-    <!-- ====== MENU INICIAR ====== -->
+    <!-- ===== MENU INICIAR ===== -->
+    <!-- abre pelo botão Iniciar; só os itens com data-janela abrem alguma coisa -->
     <div id="menu-iniciar" class="menu-iniciar oculta">
         <div class="menu-faixa">
             <span><b>Portfólio</b>95</span>
@@ -306,6 +606,7 @@
                     <span><u>R</u>odar...</span>
                 </button>
             </li>
+            <!-- a linha que separa o Desligar -->
             <li class="menu-separador"></li>
             <li>
                 <button class="menu-item" type="button">
