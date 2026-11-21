@@ -1026,6 +1026,165 @@ legend {
 }
 
 
+/* ===== CURRÍCULO (WORDPAD) ===== */
+/* a janela do WordPad com o currículo aberto */
+
+#janela-curriculo {
+    width: 620px;
+    height: 560px;
+}
+
+#janela-curriculo.maximizada {
+    width: 100%;
+    height: calc(100vh - var(--altura-barra));
+}
+
+/* Arquivo, Editar, Exibir... */
+.wp-menu {
+    display: flex;
+    gap: 16px;
+    padding: 4px 6px;
+}
+
+/* fonte, tamanho e os botões N I S */
+.wp-formatacao {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 6px;
+    border-top: 2px groove var(--branco);
+    border-bottom: 2px groove var(--branco);
+}
+
+.wp-fonte {
+    width: 180px;
+}
+
+.wp-tamanho {
+    width: 44px;
+    text-align: center;
+}
+
+.wp-formatacao button {
+    width: 30px;
+    padding: 2px 0;
+}
+
+/* a régua: um tracinho preto a cada 10px na parte de baixo */
+.wp-regua {
+    height: 18px;
+    margin: 4px 6px;
+    background:
+        repeating-linear-gradient(to right, var(--preto) 0 1px, transparent 1px 10px)
+        bottom / 100% 5px no-repeat,
+        var(--branco);
+}
+
+/* a área do documento: ocupa o resto da janela; o botão se posiciona nela */
+.wp-area {
+    position: relative;          /* o botão se posiciona dentro dela */
+    flex: 1;
+    min-height: 0;
+    margin: 0 2px;
+}
+
+/* a parte que rola */
+.wp-documento {
+    height: 100%;
+    overflow: auto;
+}
+
+/* a folha: letra de documento e espaço embaixo para o botão não cobrir o texto */
+.wp-folha {
+    padding: 24px 32px 64px;
+    font-family: "Times New Roman", serif;
+    font-size: 17px;
+}
+
+.wp-folha p {
+    margin: 0;
+}
+
+/* topo: foto à esquerda, nome e cargo à direita */
+.cv-topo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 8px;
+}
+
+.cv-foto {
+    width: 96px;
+    height: 96px;
+}
+
+.cv-nome {
+    margin: 0;
+    font-size: 28px;
+    font-weight: normal;
+}
+
+.wp-folha .cv-cargo {
+    margin-top: 4px;
+    font-weight: bold;
+}
+
+/* os títulos das seções, sublinhados */
+.cv-secao {
+    margin: 22px 0 8px;
+    font-size: 22px;
+    text-decoration: underline;        /* sublinhado */
+}
+
+.cv-item {
+    margin-bottom: 14px;
+}
+
+/* o título de cada item em letras maiúsculas */
+.cv-titulo {
+    text-transform: uppercase;         /* tudo em MAIÚSCULAS, sem reescrever o HTML */
+    font-size: 15px;
+}
+
+.cv-item ul {
+    margin: 4px 0 0;
+    padding-left: 24px;
+}
+
+/* o botão que fica parado no canto, mesmo quando a folha rola */
+.cv-baixar {
+    position: absolute;               /* sai do fluxo e se posiciona dentro da .wp-area */
+    right: 24px;
+    bottom: 12px;
+    padding: 4px 14px;
+    background: var(--cinza);
+    color: var(--preto);
+    text-decoration: none;
+    box-shadow:
+        inset -1px -1px var(--preto),
+        inset 1px 1px var(--branco),
+        inset -2px -2px var(--cinza-escuro),
+        inset 2px 2px var(--cinza-claro);
+}
+
+.cv-baixar:active {
+    box-shadow:
+        inset -1px -1px var(--branco),
+        inset 1px 1px var(--preto),
+        inset -2px -2px var(--cinza-claro),
+        inset 2px 2px var(--cinza-escuro);
+}
+
+.wp-status {
+    padding: 2px 6px;
+    margin-top: 4px;
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco);
+}
+
+
+
 /* ===== UTILITÁRIOS ===== */
 
 /* esconde qualquer elemento (o JS põe e tira essa classe) */

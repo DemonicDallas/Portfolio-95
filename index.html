@@ -84,6 +84,11 @@
             <span>Bloco de notas</span>
         </button>
 
+        <button class="icone" type="button" data-janela="curriculo">
+            <img src="img/icones/windows-documents.png" alt="">
+            <span>Currículo</span>
+        </button>
+
         <button class="icone" type="button" data-janela="calculadora">
             <img src="img/icones/windows-calculator.png" alt="">
             <span>Calculadora</span>
@@ -296,7 +301,7 @@
                 <!-- TELA 2: as páginas dos projetos (uma de cada vez) -->
                 <article id="proj-farmastock" class="ex-projeto oculta">
                     <h2>FarmaStock: sistema de farmácia</h2>
-                   <p class="ex-data">06/2026 · Engenharia de Software I</p>
+                    <p class="ex-data">06/2026 · Engenharia de Software I</p>
                     <div class="ex-tecnologias">
                         <span class="ex-tec">Figma</span>
                         <span class="ex-tec">HTML</span>
@@ -321,7 +326,8 @@
                         <li>Validei os formulários, como a senha de funcionário com no mínimo 8 caracteres e a
                             confirmação</li>
                     </ul>
-                    <a class="ex-repo" href="https://pharmastock.onrender.com" target="_blank">Ver o site funcionando</a>
+                    <a class="ex-repo" href="https://pharmastock.onrender.com" target="_blank">Ver o site
+                        funcionando</a>
                     <p>Usuário: admin | Senha: ffff@2026</p>
                     <h3>Design</h3>
                     <p>Telas que eu desenhei no Figma:</p>
@@ -443,6 +449,101 @@
         <!-- barra de status -->
         <div class="ex-status" id="ex-status">4 objeto(s)</div>
     </div>
+
+    <!-- Currículo: um documento aberto no WordPad -->
+<div id="janela-curriculo" class="janela oculta">
+    <div class="barra-titulo">
+        <span class="titulo">Currículo - WordPad</span>
+        <div class="botoes-titulo">
+            <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
+            <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
+            <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+        </div>
+    </div>
+
+    <!-- barra de menus (só enfeite) -->
+    <div class="wp-menu">
+        <span><u>A</u>rquivo</span>
+        <span><u>E</u>ditar</span>
+        <span>E<u>x</u>ibir</span>
+        <span><u>I</u>nserir</span>
+        <span><u>F</u>ormatar</span>
+        <span>Aj<u>u</u>da</span>
+    </div>
+
+    <!-- barra de formatação: fonte, tamanho, negrito, itálico, sublinhado -->
+    <div class="wp-formatacao">
+        <span class="wp-campo wp-fonte">Times New Roman</span>
+        <span class="wp-campo wp-tamanho">12</span>
+        <button type="button"><b>N</b></button>
+        <button type="button"><i>I</i></button>
+        <button type="button"><u>S</u></button>
+    </div>
+
+    <!-- a régua com os tracinhos -->
+    <div class="wp-regua"></div>
+
+    <!-- a área do documento: a folha rola, o botão fica parado no canto -->
+    <div class="wp-area">
+        <div class="wp-documento">
+            <div class="wp-folha">
+                <!-- topo: foto, nome e cargo -->
+                <div class="cv-topo">
+                    <img class="cv-foto" src="img/Curriculo/Foto-perfil.png" alt="">
+                    <div>
+                        <h1 class="cv-nome">André Luiz Dias Moreira</h1>
+                        <p class="cv-cargo">Estudante de Ciência da Computação</p>
+                    </div>
+                </div>
+
+                <h2 class="cv-secao">Formação</h2>
+                <div class="cv-item">
+                    <p class="cv-titulo">Bacharelado em Ciência da Computação</p>
+                    <p class="cv-lugar">IFTM, Campus Ituiutaba | 2023 - em andamento</p>
+                </div>
+
+                <h2 class="cv-secao">Pesquisa e extensão</h2>
+                <div class="cv-item">
+                    <p class="cv-titulo">Bolsista PIBIC</p>
+                    <p class="cv-lugar">IFTM | 2025 - 2026</p>
+                    <ul>
+                        <li>Projeto <i>Dados e voz codificados em sinais eletromagnéticos</i></li>
+                        <li>Orientador: Prof. Marcelo Loures Ribeiro</li>
+                    </ul>
+                </div>
+                <div class="cv-item">
+                    <p class="cv-titulo">Bolsista FAPEMIG</p>
+                    <p class="cv-lugar">IFTM | 2026 - 2027</p>
+                    <ul>
+                        <li>Sistema que indica vagas de estágio para estudantes de TI</li>
+                        <li>Orientadora: Profª. Reane Franco Goulart</li>
+                    </ul>
+                </div>
+
+                <h2 class="cv-secao">Projetos</h2>
+                <div class="cv-item">
+                    <p class="cv-titulo">FarmaStock</p>
+                    <p class="cv-lugar">Engenharia de Software I | ???</p>
+                    <ul>
+                        <li>Sistema de farmácia com design no Figma, em Python e MySQL</li>
+                    </ul>
+                </div>
+                <!-- Pokédex, Sensores de gases e Portfólio 95: mesmo modelo -->
+
+                <h2 class="cv-secao">Habilidades</h2>
+                <p>HTML · CSS · JavaScript · Python · Java · C · Git e GitHub · Octave · MySQL · Linux</p>
+
+                <h2 class="cv-secao">Idiomas</h2>
+                <p>Português (nativo) · Inglês (intermediário) · Espanhol (básico) · Japonês (básico)</p>
+            </div>
+        </div>
+
+        <a class="cv-baixar" href="docs/curriculo.pdf" download>Baixar o currículo</a>
+    </div>
+
+    <!-- barra de status -->
+    <div class="wp-status">Para obter ajuda, pressione F1</div>
+</div>
 
     <!-- Data/Hora: abre com dois cliques no relógio -->
     <div id="janela-data-hora" class="janela oculta">
