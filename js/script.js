@@ -49,7 +49,7 @@ const dicas = [
     "Clique duas vezes em Meus Projetos para ver o que eu já desenvolvi.",
     "O Internet Explorer leva a um site secreto dos anos 90.",
     "Quer dizer alguma coisa sobre os projetos ou sobre o portfólio? Abra o Inbox e manda uma mensagem.",
-    "Acha irritante os sons de clique? O botão de volume perto do relógio desliga os sons.",
+    "Acha os sons de clique irritantes? O botão de volume perto do relógio desliga-os.",
     "Na próxima vez que acessar meu site e não quiser ver a inicialização, aperte Esc para pular a inicialização."
 ];
 
@@ -194,8 +194,8 @@ function mostrarDica() {
 }
 
 botaoProximaDica.addEventListener("click", () => {
-    mostrarDica();
     indiceDica = (indiceDica + 1) % dicas.length;
+    mostrarDica();
 });
 
 caixaMostrar.addEventListener("change", () => {
