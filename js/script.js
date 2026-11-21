@@ -20,6 +20,7 @@ const janelaBoasVindas = document.getElementById("janela-boas-vindas");
 const areaDeTrabalho = document.querySelector(".area-de-trabalho");
 const textoDica = document.getElementById("bv-texto-dica");
 const botaoProximaDica = document.getElementById("bv-proxima-dica");
+const caixaMostrar = document.getElementById("bv-mostrar");
 const barraDeTarefas = document.querySelector(".barra-de-tarefas");
 const somInicio = document.getElementById("som-inicio");
 const somClique = document.getElementById("som-clique");
@@ -71,7 +72,9 @@ function terminarInicializacao() {
     areaDeTrabalho.classList.remove("oculta");
     barraDeTarefas.classList.remove("oculta");
     document.body.classList.remove("carregando");
+    if (caixaMostrar.checked) {
     abrirJanela(janelaBoasVindas);
+    }
 }
 
 
@@ -194,3 +197,44 @@ botaoProximaDica.addEventListener("click", () => {
     mostrarDica();
     indiceDica = (indiceDica + 1) % dicas.length;
 });
+
+caixaMostrar.addEventListener("change", () => {
+    try {
+        localStorage.setItem("mostrar-boas-vindas", caixaMostrar.checked ? "sim" : "nao");
+    } catch {}
+});
+
+try {
+    if (localStorage.getItem("mostrar-boas-vindas") === "nao") {
+        caixaMostrar.checked = false;
+    }
+} catch {}
+
+
+// ===== ARRASTAR JANELAS =====
+// ===== ARRASTAR JANELAS =====
+let janelaArrastada = null;   // a janela que está sendo segurada
+let difX = 0;                 // onde, dentro da janela, o mouse pegou
+let difY = 0;
+
+document.addEventListener("pointerdown", (evento) => {
+    const barra = evento.target.closest(".barra-titulo");
+    if (!barra) return;
+    if (evento.target.closest("button")) return;   // o ✕ não arrasta
+
+    janelaArrastada = barra.closest(".janela");
+    const posicao = janelaArrastada.getBoundingClientRect();
+    difX = evento.clientX - posicao.left;
+    difY = evento.clientY - posicao.top;
+});
+
+document.addEventListener("pointermove", (evento) => {
+    if (!janelaArrastada) return;
+    janelaArrastada.style.left = (Math.max(0, evento.clientX - difX)) + "px";
+    janelaArrastada.style.top = (Math.max(0, evento.clientY - difY)) + "px";
+});
+
+document.addEventListener("pointerup", () => {
+    janelaArrastada = null;
+});
+
