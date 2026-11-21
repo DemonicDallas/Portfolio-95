@@ -128,14 +128,18 @@ button {
 
 .relogio {
     color: var(--preto);
-    padding: 0 8px;
-    height: 42px;
     display: flex;
     align-items: center;
+}
+
+.bandeja{
+    display: flex;
+    align-items: center;        /* ícone e hora na mesma altura */
+    gap: 6px;
+    height: 42px;
     box-shadow:
         inset 1px 1px var(--cinza-escuro),
         inset -1px -1px var(--branco);
-
 }
 
 /* Botões (Iniciar e Ligar) */
@@ -180,8 +184,9 @@ button {
 }
 
 .botao-volume img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
 }
 
 

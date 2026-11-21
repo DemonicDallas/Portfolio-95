@@ -375,3 +375,29 @@ document.addEventListener("click", (evento) => {
     maximizarJanela(janela);
 });
 
+
+// ===== RELÓGIO =====
+const relogio = document.querySelector(".relogio");
+
+function atualizarRelogio() {
+    const agora = new Date();
+    const hora24 = agora.getHours();                 // 0 a 23
+
+    const sufixo = hora24 < 12 ? "AM" : "PM";        // 3. antes do meio-dia?
+
+    let hora12 = hora24 % 12;                        // 1. 14 vira 2
+    if (hora12 === 0) {                              // 2. 0 e 12 viram 12
+        hora12 = 12;
+    }
+
+    const minutos = String(agora.getMinutes()).padStart(2, "0");
+    relogio.textContent = hora12 + ":" + minutos + " " + sufixo;
+
+    relogio.title = agora.toLocaleDateString("pt-BR", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
+    });
+}
+
+atualizarRelogio();                    // 1. mostra a hora assim que a página abre
+setInterval(atualizarRelogio, 1000);   // 2. e atualiza a cada segundo
+
