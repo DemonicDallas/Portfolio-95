@@ -80,7 +80,7 @@
 
     </main>
 
-       <!-- ===== JANELAS ===== -->
+    <!-- ===== JANELAS ===== -->
 
     <!-- Boas-vindas -->
     <div id="janela-boas-vindas" class="janela oculta">
@@ -90,7 +90,7 @@
         </div>
 
         <div class="conteudo-janela">
-            <h1 class="bv-titulo">Bem-vindo ao <b>Portfolio</b> 95</h1>
+            <h1 class="bv-titulo">Bem-vindo ao <b>Portfólio</b> 95</h1>
 
             <div class="bv-corpo">
                 <div class="bv-dica">
@@ -125,7 +125,8 @@
         </div>
 
         <div class="conteudo-janela">
-            <p>Oi! Eu sou o André Luiz, estudante de Ciência da Computação no Instituto Federal de Educação, Ciência e Tecnologia do Triângulo Mineiro.</p>
+            <p>Oi! Eu sou o André Luiz, estudante de Ciência da Computação no Instituto Federal de Educação, Ciência e
+                Tecnologia do Triângulo Mineiro.</p>
         </div>
     </div>
 
@@ -151,6 +152,75 @@
         </div>
     </div>
 
+    <!-- Data/Hora -->
+    <div id="janela-data-hora" class="janela oculta">
+        <div class="barra-titulo">
+            <span class="titulo">Propriedades de Data/Hora</span>
+            <div class="botoes-titulo">
+                <button class="botao-ajuda" type="button" aria-label="Ajuda">?</button>
+                <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+            </div>
+        </div>
+
+        <div class="conteudo-janela">
+            <!-- as abas -->
+            <div class="abas">
+                <button class="aba ativa" type="button" data-aba="data">Data e hora</button>
+                <button class="aba" type="button" data-aba="fuso">Fuso horário</button>
+            </div>
+
+            <!-- aba 1: Data e hora -->
+            <div id="dh-aba-data" class="dh-painel">
+                <div class="dh-colunas">
+                    <fieldset>
+                        <legend><u>D</u>ata</legend>
+                        <div class="dh-controles">
+                            <select id="dh-mes">
+                                <option value="0">Janeiro</option>
+                                <option value="1">Fevereiro</option>
+                                <option value="2">Março</option>
+                                <option value="3">Abril</option>
+                                <option value="4">Maio</option>
+                                <option value="5">Junho</option>
+                                <option value="6">Julho</option>
+                                <option value="7">Agosto</option>
+                                <option value="8">Setembro</option>
+                                <option value="9">Outubro</option>
+                                <option value="10">Novembro</option>
+                                <option value="11">Dezembro</option>
+                            </select>
+                            <input id="dh-ano" type="number" min="1980" max="2099">
+                        </div>
+                        <div id="dh-calendario" class="dh-calendario"></div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend><u>H</u>ora</legend>
+                        <div id="dh-analogico" class="dh-analogico">
+                            <div id="ponteiro-hora" class="dh-ponteiro ponteiro-hora"></div>
+                            <div id="ponteiro-min" class="dh-ponteiro ponteiro-min"></div>
+                            <div id="ponteiro-seg" class="dh-ponteiro ponteiro-seg"></div>
+                        </div>
+                        <p id="dh-hora" class="dh-hora">12:00:00</p>
+                    </fieldset>
+                </div>
+                <p>Fuso horário atual: <span id="dh-fuso">—</span></p>
+            </div>
+
+            <!-- aba 2: Fuso horário -->
+            <div id="dh-aba-fuso" class="dh-painel oculta">
+                <p>Seu fuso horário: <b id="dh-fuso-nome">—</b></p>
+                <p id="dh-fuso-gmt">GMT</p>
+            </div>
+
+            <div class="dh-rodape">
+                <button type="button" class="botao-fechar">OK</button>
+                <button type="button" class="botao-fechar">Cancelar</button>
+                <button type="button" disabled>Aplicar</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="barra-de-tarefas oculta">
         <button class="botao-start" type="button">
             <img src="img/icones/icon-windows.jpg" alt="">
@@ -158,15 +228,73 @@
         </button>
 
         <div class="janelas-abertas"></div>
-        
+
         <div class="bandeja">
             <button id="botao-volume" class="botao-volume" type="button">
                 <img src="img/icones/windows-volume-control.png" alt="Som ligado">
             </button>
             <div class="relogio">12:00</div>
         </div>
-        
     </footer>
+
+    <!-- ====== MENU INICIAR ====== -->
+    <div id="menu-iniciar" class="menu-iniciar oculta">
+        <div class="menu-faixa">
+            <span><b>Portfólio</b>95</span>
+        </div>
+
+        <ul class="menu-itens">
+            <li>
+                <button class="menu-item" type="button">
+                    <img src="img/icones/windows-plus-programs.png" alt="">
+                    <span><u>P</u>rogramas</span>
+                    <span class="menu-seta">▸</span>
+                </button>
+            </li>
+            <li>
+                <button class="menu-item" type="button">
+                    <img src="img/icones/windows-documents.png" alt="">
+                    <span><u>D</u>ocumentos</span>
+                    <span class="menu-seta">▸</span>
+                </button>
+            </li>
+            <li>
+                <button class="menu-item" type="button">
+                    <img src="img/icones/windows-plus-settings.png" alt="">
+                    <span><u>C</u>onfigurações</span>
+                    <span class="menu-seta">▸</span>
+                </button>
+            </li>
+            <li>
+                <button class="menu-item" type="button">
+                    <img src="img/icones/windows-find.png" alt="">
+                    <span><u>E</u>ncontrar</span>
+                    <span class="menu-seta">▸</span>
+                </button>
+            </li>
+
+            <li>
+                <button class="menu-item" type="button" data-janela="boas-vindas">
+                    <img src="img/icones/windows-plus-help.png" alt="">
+                    <span><u>A</u>juda</span>
+                </button>
+            </li>
+
+            <li>
+                <button class="menu-item" type="button">
+                    <img src="img/icones/windows-plus-run.png" alt="">
+                    <span><u>R</u>odar...</span>
+                </button>
+            </li>
+            <li class="menu-separador"></li>
+            <li>
+                <button class="menu-item" type="button">
+                    <img src="img/icones/windows-plus-shut-down.png" alt="">
+                    <span><u>D</u>esligar...</span>
+                </button>
+            </li>
+        </ul>
+    </div>
 
 </body>
 

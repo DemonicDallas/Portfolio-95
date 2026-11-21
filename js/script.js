@@ -26,6 +26,9 @@ const somInicio = document.getElementById("som-inicio");
 const somClique = document.getElementById("som-clique");
 somInicio.volume = 0.1;
 somClique.volume = 0.2;
+const calendario = document.getElementById("dh-calendario");
+const analogico = document.getElementById("dh-analogico");
+
 
 // ===== TEXTOS DA BIOS =====
 const linhasAntes = [
@@ -66,6 +69,7 @@ function tocarSomInicio() {
 // ===== MOSTRAR A ÁREA DE TRABALHO =====
 // NOVO: esconde todas as telas de boot e mostra os ícones e a barra
 function terminarInicializacao() {
+    pulou = true;
     const telas = document.querySelectorAll(".tela-boot");
     for (const tela of telas) {
         tela.classList.add("oculta");
@@ -77,7 +81,7 @@ function terminarInicializacao() {
         abrirJanela(janelaBoasVindas);
     }
 
-     // cursor de "ainda carregando" por 3 segundos
+    // cursor de "ainda carregando" por 3 segundos
     document.body.classList.add("iniciando");
     setTimeout(() => {
         document.body.classList.remove("iniciando");
@@ -166,7 +170,7 @@ document.addEventListener("pointerdown", (evento) => {
     if (!botao) return;
     if (!somLigado) return;
     somClique.currentTime = 0;
-    somClique.play().catch(() => {});
+    somClique.play().catch(() => { });
 });
 
 // ===== QUANDO CLICAR NO VOLUME =====
@@ -228,14 +232,14 @@ mostrarDica();
 caixaMostrar.addEventListener("change", () => {
     try {
         localStorage.setItem("mostrar-boas-vindas", caixaMostrar.checked ? "sim" : "nao");
-    } catch {}
+    } catch { }
 });
 
 try {
     if (localStorage.getItem("mostrar-boas-vindas") === "nao") {
         caixaMostrar.checked = false;
     }
-} catch {}
+} catch { }
 
 
 // ===== ARRASTAR JANELAS =====
@@ -255,7 +259,7 @@ document.addEventListener("pointerdown", (evento) => {
     const posicao = janelaArrastada.getBoundingClientRect();
     difX = evento.clientX - posicao.left;
     difY = evento.clientY - posicao.top;
-    
+
 });
 
 document.addEventListener("pointermove", (evento) => {
@@ -269,27 +273,29 @@ document.addEventListener("pointerup", () => {
 });
 
 
-// ===== QUANDO DER DOIS CLIQUES EM UM ÍCONE =====
+// ===== QUANDO DER DOIS CLIQUES (ÍCONES E RELÓGIO) =====
 document.addEventListener("dblclick", (evento) => {
+    // dois cliques no relógio → Data/Hora
+    if (evento.target.closest(".relogio")) {
+        abrirPorNome("data-hora");
+        return;
+    }
+    // dois cliques num ícone → a janela dele
     const icone = evento.target.closest(".icone");
-    if(!icone) return;
-    
-    const nome = icone.dataset.janela;
-    const janela = document.getElementById("janela-" + nome);
-    if (!janela) return; // icone que ainda não tem janela;
-
-    abrirJanela(janela);
+    if (!icone) return;
+    abrirPorNome(icone.dataset.janela);
 });
+
 
 
 // ====== TRAZER UMA JANELA PARA A FRENTE ======
 let zTopo = 10; // É o mesmo index do inicio que eu tinha colocado, porém, agora é uma variável que vai aumentando a cada clique em uma janela
 
-function ativarJanela(janela){
-    
+function ativarJanela(janela) {
+
     // todas as ficam com a barra cinza em cima;
 
-    for(const outra of document.querySelectorAll(".janela")){
+    for (const outra of document.querySelectorAll(".janela")) {
         outra.classList.add("inativa");
     }
 
@@ -321,10 +327,18 @@ function minimizarJanela(janela) {
 function maximizarJanela(janela) {
     janela.classList.toggle("maximizada");
 }
+
+// ===== ABRIR UMA JANELA PELO NOME =====
+function abrirPorNome(nome) {
+    const janela = document.getElementById("janela-" + nome);
+    if (!janela) return;
+    abrirJanela(janela);
+}
+
 // ===== BOTÕES DA BARRA DE TAREFAS =====
 const janelasAbertas = document.querySelector(".janelas-abertas");
 
-function criarBotaoTarefa(janela){
+function criarBotaoTarefa(janela) {
     const botao = document.createElement("button");  // cria o botao
     botao.type = "button";
     botao.className = "botao-tarefa";
@@ -333,9 +347,9 @@ function criarBotaoTarefa(janela){
     janelasAbertas.appendChild(botao);  // Deixa minimizado na barra de tarefas
 }
 
-function acharBotaoTarefa(janela){
+function acharBotaoTarefa(janela) {
     return janelasAbertas.querySelector(`.botao-tarefa[data-janela="${janela.id}"]`);
-}  
+}
 
 
 // ===== QUANDO CLICAR EM UM BOTÃO DA BARRA DE TAREFAS =====
@@ -375,29 +389,155 @@ document.addEventListener("click", (evento) => {
     maximizarJanela(janela);
 });
 
+// ===== QUANDO CLICAR EM UM ITEM DO MENU =====
+document.addEventListener("click", (evento) => {
+    const item = evento.target.closest(".menu-item");
+    if (!item) return;                       // não clicou em item nenhum
+    if (!item.dataset.janela) return;           // item sem janela: não faz nada
+
+    abrirPorNome(item.dataset.janela);
+    fecharMenu();
+});
+
 
 // ===== RELÓGIO =====
 const relogio = document.querySelector(".relogio");
+const dhHora = document.getElementById("dh-hora");
+const ponteiroSeg = document.getElementById("ponteiro-seg");
+const ponteiroMin = document.getElementById("ponteiro-min");
+const ponteiroHora = document.getElementById("ponteiro-hora");
 
 function atualizarRelogio() {
     const agora = new Date();
-    const hora24 = agora.getHours();                 // 0 a 23
+    const hora24 = agora.getHours();
 
-    const sufixo = hora24 < 12 ? "AM" : "PM";        // 3. antes do meio-dia?
-
-    let hora12 = hora24 % 12;                        // 1. 14 vira 2
-    if (hora12 === 0) {                              // 2. 0 e 12 viram 12
+    const sufixo = hora24 < 12 ? "AM" : "PM";
+    let hora12 = hora24 % 12;
+    if (hora12 === 0) {
         hora12 = 12;
     }
 
     const minutos = String(agora.getMinutes()).padStart(2, "0");
+    const segundos = String(agora.getSeconds()).padStart(2, "0");
+
+    // relógio da barra de tarefas
     relogio.textContent = hora12 + ":" + minutos + " " + sufixo;
 
+    // a data por extenso, aparece ao parar o mouse no relógio
     relogio.title = agora.toLocaleDateString("pt-BR", {
         weekday: "long", day: "numeric", month: "long", year: "numeric"
     });
+
+    // janela de Data/Hora: o campo de texto
+    dhHora.textContent = hora12 + ":" + minutos + ":" + segundos + " " + sufixo;
+
+    // janela de Data/Hora: os ponteiros
+    const s = agora.getSeconds();
+    const m = agora.getMinutes();
+    const h = agora.getHours();
+    ponteiroSeg.style.transform = `rotate(${s * 6}deg)`;
+    ponteiroMin.style.transform = `rotate(${m * 6 + s * 0.1}deg)`;
+    ponteiroHora.style.transform = `rotate(${(h % 12) * 30 + m * 0.5}deg)`;
 }
 
-atualizarRelogio();                    // 1. mostra a hora assim que a página abre
-setInterval(atualizarRelogio, 1000);   // 2. e atualiza a cada segundo
+atualizarRelogio();
+setInterval(atualizarRelogio, 1000);
+
+// os 60 pontinhos do mostrador: criados uma vez só
+for (let i = 0; i < 60; i++) {
+    const ponto = document.createElement("div");
+    ponto.className = i % 5 === 0 ? "dh-ponto grande" : "dh-ponto";
+    ponto.style.transform = `translate(-50%, -50%) rotate(${i * 6}deg) translateY(-80px)`;
+    analogico.appendChild(ponto);
+}
+
+// ===== CALENDÁRIO =====
+const selMes = document.getElementById("dh-mes");
+const inpAno = document.getElementById("dh-ano");
+
+function criarCelula(texto, classe) {
+    const celula = document.createElement("div");
+    celula.textContent = texto;
+    if (classe) celula.className = classe;
+    calendario.appendChild(celula);
+}
+
+function montarCalendario(ano, mes) {              // ← agora recebe ano e mês
+    const hoje = new Date();                       // continua: serve para achar o dia de hoje
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+    const totalDias = new Date(ano, mes + 1, 0).getDate();
+
+    calendario.innerHTML = "";
+
+    // 1. as letras dos dias da semana
+    for (const letra of ["D", "S", "T", "Q", "Q", "S", "S"]) {
+        criarCelula(letra, "dh-semana");
+    }
+
+    // 2. as casas vazias antes do dia 1
+    for (let i = 0; i < primeiroDia; i++) {
+        criarCelula("", "");
+    }
+
+    // 3. os dias do mês; hoje só fica azul no mês e no ano certos
+    for (let dia = 1; dia <= totalDias; dia++) {
+        const ehHoje = dia === hoje.getDate()
+                    && mes === hoje.getMonth()
+                    && ano === hoje.getFullYear();
+        const classe = ehHoje ? "dh-hoje" : "";
+        criarCelula(dia, classe);
+    }
+}
+
+
+function redesenharCalendario() {
+    montarCalendario(Number(inpAno.value), Number(selMes.value));
+}
+
+// começa no mês e no ano de hoje
+const agoraCal = new Date();
+selMes.value = agoraCal.getMonth();
+inpAno.value = agoraCal.getFullYear();
+redesenharCalendario();
+
+// trocou o mês ou o ano → monta de novo
+selMes.addEventListener("change", redesenharCalendario);
+inpAno.addEventListener("input", redesenharCalendario);
+
+// ===== MENU INICIAR =====
+const menuIniciar = document.getElementById("menu-iniciar");
+const botaoStart = document.querySelector(".botao-start");
+
+function abrirMenu() {
+    menuIniciar.classList.remove("oculta");
+    botaoStart.classList.add("aberto");
+}
+
+function fecharMenu() {
+    menuIniciar.classList.add("oculta");
+    botaoStart.classList.remove("aberto");
+}
+
+botaoStart.addEventListener("click", () => {
+    if (menuIniciar.classList.contains("oculta")) {
+        abrirMenu();   // está escondido → abre
+    } else {
+        fecharMenu();   // está aberto → fecha
+    }
+});
+
+document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") {
+        fecharMenu();
+    }
+});
+
+document.addEventListener("pointerdown", (evento) => {
+    if (menuIniciar.classList.contains("oculta")) return;   // menu já fechado
+    if (evento.target.closest(".menu-iniciar")) return;                 // clicou dentro do menu
+    if (evento.target.closest(".botao-start")) return;                 // clicou no Iniciar
+    fecharMenu();
+});
+
+
 

@@ -111,12 +111,12 @@ button {
     gap: 4px;
 }
 
-.janela.inativa .barra-titulo{
+.janela.inativa .barra-titulo {
     background: var(--cinza-escuro);
     color: var(--cinza);
 }
 
-.janela.maximizada{
+.janela.maximizada {
     top: 0 !important;
     left: 0 !important;
     width: 100%;
@@ -132,11 +132,159 @@ button {
     align-items: center;
 }
 
-.bandeja{
+/* DATA/HORA */
+
+#janela-data-hora {
+    width: 680px;
+}
+
+
+.dh-calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* 7 colunas iguais */
+    gap: 0;
+    /* 0 de espaço entre as colunas */
+    padding: 6px;
+    text-align: center;
+    background: var(--branco);
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco),
+        inset 2px 2px var(--preto),
+        inset -2px -2px var(--cinza-claro);
+}
+
+.dh-semana {
+    background: var(--cinza-escuro);
+    /* ← novo */
+    color: var(--cinza-claro);
+    /* ← novo */
+}
+
+.dh-hoje {
+    background: var(--azul);
+    color: var(--branco);
+}
+
+fieldset {
+    margin: 0;
+    padding: 10px;
+    border: 2px groove var(--branco);
+    /* linha "cavada": escura + clara */
+}
+
+legend {
+    padding: 0 4px;
+}
+
+.dh-controles {
     display: flex;
-    align-items: center;        /* ícone e hora na mesma altura */
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+#dh-mes,
+#dh-ano,
+.dh-hora {
+    font: inherit;
+    /* senão, select e input usam a fonte do sistema */
+    padding: 2px 4px;
+    border: none;
+    background: var(--branco);
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco),
+        inset 2px 2px var(--preto),
+        inset -2px -2px var(--cinza-claro);
+}
+
+.dh-hora {
+    margin: 10px auto 0;
+    width: 140px;
+    text-align: center;
+}
+
+.dh-colunas {
+    display: flex;
+    gap: 12px;
+}
+
+.dh-colunas fieldset {
+    flex: 1;
+}
+
+.dh-rodape {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.dh-rodape button {
+    min-width: 100px;
+}
+
+.janela button:disabled {
+    color: var(--cinza-escuro);
+    text-shadow: 1px 1px var(--branco);
+    cursor: default;
+}
+
+.abas {
+    display: flex;
+}
+
+
+.dh-painel {
+    padding: 12px;
+    box-shadow:
+        inset -1px -1px var(--preto),
+        inset 1px 1px var(--cinza-claro),
+        inset -2px -2px var(--cinza-escuro),
+        inset 2px 2px var(--branco);
+}
+
+.dh-analogico {
+    position: relative;      /* os ponteiros se posicionam dentro dele */
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.dh-ponteiro {
+    position: absolute;
+    left: 50%;
+    bottom: 50%;                 /* o pé do ponteiro fica no centro */
+    transform-origin: 50% 100%;  /* gira pelo pé, não pelo meio */
+}
+
+.ponteiro-hora { width: 6px; height: 45px; margin-left: -3px; background: var(--fundo); }
+.ponteiro-min  { width: 4px; height: 65px; margin-left: -2px; background: var(--fundo); }
+.ponteiro-seg  { width: 1px; height: 75px; background: var(--preto); }
+
+.dh-ponto {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    background: var(--cinza-escuro);
+}
+
+.dh-ponto.grande {
+    width: 6px;
+    height: 6px;
+    background: var(--fundo);
+}
+
+.bandeja {
+    display: flex;
+    align-items: center;
+    /* ícone e hora na mesma altura */
     gap: 6px;
     height: 42px;
+    padding: 0 8px 0 4px;
     box-shadow:
         inset 1px 1px var(--cinza-escuro),
         inset -1px -1px var(--branco);
@@ -144,7 +292,9 @@ button {
 
 /* Botões (Iniciar e Ligar) */
 
-.botao-start, #botao-ligar, .botao-tarefa {
+.botao-start,
+#botao-ligar,
+.botao-tarefa {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -162,7 +312,11 @@ button {
     cursor: pointer;
 }
 
-.botao-start:active, #botao-ligar:active,.botao-tarefa:active, .botao-tarefa.ativo {
+.botao-start:active,
+#botao-ligar:active,
+.botao-tarefa:active,
+.botao-tarefa.ativo,
+.botao-start.aberto {
     box-shadow:
         inset -1px -1px var(--branco),
         inset 1px 1px var(--preto),
@@ -190,11 +344,13 @@ button {
 }
 
 
-.botao-tarefa{
+.botao-tarefa {
     width: 240px;
-    justify-content: flex-start; /* texto fica a esquerda */
+    justify-content: flex-start;
+    /* texto fica a esquerda */
     padding: 0 10px;
-    white-space: nowrap; /* não quebra linha */
+    white-space: nowrap;
+    /* não quebra linha */
     overflow: hidden;
 }
 
@@ -203,10 +359,12 @@ button {
 
 /* Telas de inicialização */
 
-.tela-boot{
+.tela-boot {
     position: fixed;
-    inset:0;           /* topo, direita, baixo e esquerda = 0 de uma vez */
-    z-index: 1000;      /* fica na frente de tudo */
+    inset: 0;
+    /* topo, direita, baixo e esquerda = 0 de uma vez */
+    z-index: 1000;
+    /* fica na frente de tudo */
     background: var(--preto);
 }
 
@@ -224,7 +382,8 @@ button {
 
 #bios-texto {
     margin: 0;
-    color: #AAAAAA;     /* o cinza dos monitores antigos */
+    color: #AAAAAA;
+    /* o cinza dos monitores antigos */
     font-family: "PerfectDOS", monospace;
     font-size: 18px;
 }
@@ -239,23 +398,28 @@ button {
     align-items: center;
 }
 
-.barra-progresso{
+.barra-progresso {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     height: 12px;
-    background: linear-gradient(90deg, #1a3fbf,#ffffff, #1a3fbf);
+    background: linear-gradient(90deg, #1a3fbf, #ffffff, #1a3fbf);
     background-size: 200% 100%;
     animation: correr 1.5s linear infinite;
 }
 
 @keyframes correr {
-    from { background-position: 100% 0; }
-    to { background-position: -100% 0; }
+    from {
+        background-position: 100% 0;
+    }
+
+    to {
+        background-position: -100% 0;
+    }
 }
 
-.splash-imagem{
+.splash-imagem {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -273,7 +437,7 @@ button {
 
 /* JANELAS */
 
-.janela{
+.janela {
     position: fixed;
     top: 15%;
     left: 30%;
@@ -283,7 +447,7 @@ button {
     flex-direction: column;
     padding: 3px;
     background: var(--cinza);
-    
+
     box-shadow:
         inset -1px -1px var(--preto),
         inset 1px 1px var(--cinza-claro),
@@ -311,6 +475,20 @@ button {
         inset -2px -2px var(--cinza-claro),
         inset 2px 2px var(--cinza-escuro);
 }
+
+
+.abas .aba {
+    padding: 4px 14px;
+    box-shadow:
+        inset 1px 1px var(--branco),
+        inset -1px 0 var(--preto);
+}
+
+.aba.ativa {
+    padding-bottom: 6px;     /* um pouco mais alta que as outras */
+    margin-top: -2px;
+}
+
 
 .conteudo-janela {
     flex: 1;
@@ -366,7 +544,8 @@ button {
 .bv-dica {
     flex: 1;
     padding: 12px;
-    background: #FFFFE1;   /* o amarelinho das dicas do Windows */
+    background: #FFFFE1;
+    /* o amarelinho das dicas do Windows */
     box-shadow:
         inset 1px 1px var(--cinza-escuro),
         inset -1px -1px var(--branco),
@@ -384,6 +563,7 @@ button {
     flex-direction: column;
     gap: 8px;
 }
+
 .bv-rodape {
     display: flex;
     align-items: center;
@@ -391,13 +571,95 @@ button {
     margin-top: 14px;
 }
 
+/* MENU INICIAR */
+
+.menu-iniciar {
+    position: fixed;
+    left: 2px;
+    bottom: var(--altura-barra);
+    /* colado em cima da barra de tarefas */
+    z-index: 998;
+    /* na frente das janelas, atrás da barra (999) */
+    display: flex;
+    padding: 3px;
+    background: var(--cinza);
+    box-shadow:
+        inset -1px -1px var(--preto),
+        inset 1px 1px var(--cinza-claro),
+        inset -2px -2px var(--cinza-escuro),
+        inset 2px 2px var(--branco);
+}
+
+.menu-faixa {
+    display: flex;
+    align-items: flex-end;
+    /* texto embaixo da faixa */
+    justify-content: center;
+    width: 34px;
+    padding-bottom: 8px;
+    background: var(--cinza-escuro);
+}
+
+.menu-faixa span {
+    writing-mode: vertical-rl;
+    /* texto na vertical */
+    transform: rotate(180deg);
+    /* vira para ler de baixo para cima */
+    font-size: 24px;
+    color: var(--cinza);
+}
+
+.menu-faixa b {
+    color: var(--branco);
+}
+
+.menu-itens {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    min-width: 260px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    /* ícone e texto na mesma altura */
+    gap: 10px;
+    width: 100%;
+    padding: 8px 40px 8px 8px;
+    background: none;
+    border: none;
+    color: var(--preto);
+    cursor: pointer;
+}
+
+.menu-item img {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.menu-item:hover {
+    background: var(--azul);
+    color: var(--branco);
+}
+
+.menu-separador {
+    height: 2px;
+    margin: 4px 2px;
+    box-shadow:
+        inset 0 1px var(--cinza-escuro),
+        inset 0 -1px var(--branco);
+}
+
+.menu-seta {
+    margin-left: auto;
+    font-size: 12px;
+    /* empurra a seta até a ponta direita */
+}
 
 /* Utilitários */
 
-.oculta{
+.oculta {
     display: none !important;
 }
-
-
-
-
