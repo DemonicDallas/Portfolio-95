@@ -504,6 +504,35 @@ redesenharCalendario();
 selMes.addEventListener("change", redesenharCalendario);
 inpAno.addEventListener("input", redesenharCalendario);
 
+
+// ===== ABAS =====
+document.addEventListener("click", (evento) => {
+    const aba = evento.target.closest(".aba");
+    if (!aba) return;
+
+    for (const outra of document.querySelectorAll(".aba")) {
+        outra.classList.remove("ativa");
+    }
+    aba.classList.add("ativa");
+
+    for (const painel of document.querySelectorAll(".dh-painel")) {
+        painel.classList.add("oculta");
+    }
+    document.getElementById("dh-aba-" + aba.dataset.aba).classList.remove("oculta");
+});
+
+// ===== FUSO HORÁRIO =====
+const fusoNome = Intl.DateTimeFormat().resolvedOptions().timeZone;   // "America/Sao_Paulo"
+const diferenca = -new Date().getTimezoneOffset() / 60;               // -3
+const gmt = "GMT" + (diferenca >= 0 ? "+" : "") + diferenca;          // "GMT-3"
+
+document.getElementById("dh-fuso").textContent = gmt;
+document.getElementById("dh-fuso-nome").textContent = fusoNome;
+document.getElementById("dh-fuso-gmt").textContent = gmt;
+
+
+
+
 // ===== MENU INICIAR =====
 const menuIniciar = document.getElementById("menu-iniciar");
 const botaoStart = document.querySelector(".botao-start");
@@ -538,6 +567,4 @@ document.addEventListener("pointerdown", (evento) => {
     if (evento.target.closest(".botao-start")) return;                 // clicou no Iniciar
     fecharMenu();
 });
-
-
 
