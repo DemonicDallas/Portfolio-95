@@ -260,6 +260,11 @@ button {
     cursor: url("../img/cursores/ampulheta.png") 15 15, wait;
 }
 
+.iniciando,
+.iniciando * {
+    cursor: url("../img/cursores/seta-ampulheta.png") 0 0, progress !important;
+}
+
 
 /* JANELAS */
 

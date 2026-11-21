@@ -24,7 +24,8 @@ const caixaMostrar = document.getElementById("bv-mostrar");
 const barraDeTarefas = document.querySelector(".barra-de-tarefas");
 const somInicio = document.getElementById("som-inicio");
 const somClique = document.getElementById("som-clique");
-somInicio.volume = 0.3;
+somInicio.volume = 0.1;
+somClique.volume = 0.2;
 
 // ===== TEXTOS DA BIOS =====
 const linhasAntes = [
@@ -73,8 +74,14 @@ function terminarInicializacao() {
     barraDeTarefas.classList.remove("oculta");
     document.body.classList.remove("carregando");
     if (caixaMostrar.checked) {
-    abrirJanela(janelaBoasVindas);
+        abrirJanela(janelaBoasVindas);
     }
+
+     // cursor de "ainda carregando" por 3 segundos
+    document.body.classList.add("iniciando");
+    setTimeout(() => {
+        document.body.classList.remove("iniciando");
+    }, 3000);
 }
 
 
