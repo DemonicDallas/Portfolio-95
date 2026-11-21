@@ -30,11 +30,12 @@
     </div>
 
     <audio id="som-inicio" src="sons/inicio.wav" preload="auto"></audio>
+    <audio id="som-clique" src="sons/mouse-clique.mp3" preload="auto"></audio>
 
 
     <!-- ===== Área de Trabalho ===== -->
 
-    <main class="area-de-trabalho">
+    <main class="area-de-trabalho oculta">
         <button class="icone" type="button" data-janela="meu-computador">
             <img src="img/icones/windows-plus-my-computer.png" alt="">
             <span>Meu Computador</span>
@@ -76,22 +77,22 @@
             <span>Calculadora</span>
         </button>
 
-        <main class="area-de-trabalho oculta"></main>
 
     </main>
-    <footer class="barra-de-tarefas">
+    <footer class="barra-de-tarefas oculta">
         <button class="botao-start" type="button">
             <img src="img/icones/icon-windows.jpg" alt="">
             <span>Iniciar</span>
         </button>
 
-        <footer class="barra-de-tarefas oculta">
-            display: none;
-        </footer>
+        <div class="janelas-abertas"></div>
+        
+        <button id="botao-volume" class="botao-volume" type="button">
+        
+            <img src="img/icones/windows-volume-control.png" alt="Som ligado">
+        
+        </button>
 
-        <div class="janelas-abertas">
-
-        </div>
         <div class="relogio">12:00 PM</div>
     </footer>
 

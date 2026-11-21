@@ -156,6 +156,19 @@ button {
 .botao-start img {
     width: 28px;
     height: 28px;
+    align-self: right;
+}
+
+.botao-volume {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 4px;
+}
+
+.botao-volume img {
+    width: 24px;
+    height: 24px;
 }
 
 
