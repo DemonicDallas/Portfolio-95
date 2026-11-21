@@ -40,6 +40,7 @@ somInicio.volume = 0.1;
 somClique.volume = 0.2;
 const calendario = document.getElementById("dh-calendario");
 const analogico = document.getElementById("dh-analogico");
+const exDetalhes = document.getElementById("ex-detalhes");
 
 
 // ===== TEXTOS DA BIOS =====
@@ -633,6 +634,14 @@ document.addEventListener("dblclick", (evento) => {
     const item = evento.target.closest(".ex-item");
     if (!item) return;
     abrirProjeto(item.dataset.projeto);
+    exDetalhes.textContent = "Clique em um projeto para ver os detalhes.";
+});
+
+
+document.addEventListener("click", (evento) => {
+    const item = evento.target.closest(".ex-item");   // clicou num ícone?
+    if (!item) return;                                // não → não faz nada
+    exDetalhes.textContent = item.dataset.descricao;  // o data-descricao vai para o painel
 });
 
 exVoltar.addEventListener("click", voltarPasta);
