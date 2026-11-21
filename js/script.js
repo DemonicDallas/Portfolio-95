@@ -9,6 +9,11 @@ const telaBios = document.getElementById("tela-bios");
 const botaoLigar = document.getElementById("botao-ligar");
 const biosTexto = document.getElementById("bios-texto");
 const somInicio = document.getElementById("som-inicio");
+somInicio.volume = 0.3;
+const telaPreta = document.getElementById("tela-preta");
+const telaSplash = document.getElementById("tela-splash");
+const areaDeTrabalho = document.querySelector(".area-de-trabalho");
+const barraDeTarefas = document.querySelector(".barra-de-tarefas");
 
 // ===== TEXTOS DA BIOS =====
 const linhasAntes = [
@@ -42,7 +47,7 @@ async function iniciar() {
         await esperar(pausa);
     }
 
-    // parte 2: o teste de memória
+    // parte 3: o teste de memória
     const textoAntes = biosTexto.textContent;
 
     for (let memoria = 1024; memoria <= 16384; memoria += 1024) {
@@ -53,17 +58,36 @@ async function iniciar() {
     biosTexto.textContent = textoAntes + "Memory Test: 16384K OK\n";
     await esperar(500);
 
-    // parte 3: as linhas de depois da memória
+    // parte 4: as linhas de depois da memória
     for (const linha of linhasDepois) {
         biosTexto.textContent += linha + "\n";
         const pausa = Math.random() * (1000 - 300) + 300;
         await esperar(pausa);
     }
 
-    // o som (no passo 6 ele vai para o fim da sequência)
+     // 5. troca a BIOS pela tela preta
+    telaBios.classList.add("oculta");
+    telaPreta.classList.remove("oculta");
+    await esperar(2000);
+
+    // 6. troca a tela preta pela tela de carregamento
+    telaPreta.classList.add("oculta");
+    telaSplash.classList.remove("oculta");
+    await esperar(5000);
+
+    // 7. tira a tela de carregamento: fica só o fundo, com a ampulheta
+    telaSplash.classList.add("oculta");
+    document.body.classList.add("carregando");
+    await esperar(2000);
+
+     // 8. aparecem os ícones e a barra, o cursor volta ao normal e toca o som
+    areaDeTrabalho.classList.remove("oculta");
+    barraDeTarefas.classList.remove("oculta");
+    document.body.classList.remove("carregando");
     somInicio.play().catch(() => {
         console.log("Não foi possível tocar o som de início.");
     });
+
 }
 
 // ===== QUANDO CLICAR EM LIGAR =====

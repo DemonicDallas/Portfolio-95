@@ -219,6 +219,10 @@ button {
     object-fit: contain;
 }
 
+.carregando{
+    cursor: wait;
+}
+
 /* Utilitários */
 
 .oculta{
