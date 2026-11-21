@@ -101,6 +101,7 @@ button {
     gap: 4px;
     /* espaço entre as partes */
     padding: 0 2px;
+    z-index: 100;
 
 }
 
@@ -235,6 +236,116 @@ button {
 .carregando{
     cursor: wait;
 }
+
+
+/* JANELAS */
+
+.janela{
+    position: fixed;
+    top: 15%;
+    left: 30%;
+    width: 560px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    background: var(--cinza);
+    
+    box-shadow:
+        inset -1px -1px var(--preto),
+        inset 1px 1px var(--cinza-claro),
+        inset -2px -2px var(--cinza-escuro),
+        inset 2px 2px var(--branco);
+}
+
+.janela button {
+    background: var(--cinza);
+    border: none;
+    padding: 4px 14px;
+    cursor: pointer;
+    box-shadow:
+        inset -1px -1px var(--preto),
+        inset 1px 1px var(--branco),
+        inset -2px -2px var(--cinza-escuro),
+        inset 2px 2px var(--cinza-claro);
+}
+
+
+.janela button:active {
+    box-shadow:
+        inset -1px -1px var(--branco),
+        inset 1px 1px var(--preto),
+        inset -2px -2px var(--cinza-claro),
+        inset 2px 2px var(--cinza-escuro);
+}
+
+.conteudo-janela {
+    flex: 1;
+    padding: 14px;
+}
+
+/* Barra de título */
+
+.barra-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 4px 3px 6px;
+    background: var(--azul);
+    color: var(--branco);
+    font-weight: bold;
+    user-select: none;
+}
+
+.barra-titulo .botao-fechar {
+    width: 24px;
+    height: 22px;
+    padding: 0;
+    font-size: 14px;
+    color: var(--preto);
+}
+
+/* Bv-titulo */
+
+.bv-titulo {
+    margin: 0 0 12px;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+.bv-corpo {
+    display: flex;
+    gap: 12px;
+}
+
+.bv-dica {
+    flex: 1;
+    padding: 12px;
+    background: #FFFFE1;   /* o amarelinho das dicas do Windows */
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco),
+        inset 2px 2px var(--preto),
+        inset -2px -2px var(--cinza-claro);
+}
+
+.bv-pergunta {
+    margin: 0 0 8px;
+    font-weight: bold;
+}
+
+.bv-botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.bv-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+
 
 /* Utilitários */
 

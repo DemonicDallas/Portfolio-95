@@ -7,6 +7,7 @@ function esperar(ms) {
 let somLigado = true;   // o botão de volume liga e desliga
 let pulou = false;      // vira true quando a pessoa aperta Esc
 
+
 // ===== ELEMENTOS DA PÁGINA =====
 const telaLigar = document.getElementById("tela-ligar");
 const telaBios = document.getElementById("tela-bios");
@@ -15,7 +16,10 @@ const telaSplash = document.getElementById("tela-splash");
 const botaoLigar = document.getElementById("botao-ligar");
 const botaoVolume = document.getElementById("botao-volume");
 const biosTexto = document.getElementById("bios-texto");
+const janelaBoasVindas = document.getElementById("janela-boas-vindas");
 const areaDeTrabalho = document.querySelector(".area-de-trabalho");
+const textoDica = document.getElementById("bv-texto-dica");
+const botaoProximaDica = document.getElementById("bv-proxima-dica");
 const barraDeTarefas = document.querySelector(".barra-de-tarefas");
 const somInicio = document.getElementById("som-inicio");
 const somClique = document.getElementById("som-clique");
@@ -39,6 +43,15 @@ const linhasDepois = [
     "Starting Windows 95..."
 ];
 
+const dicas = [
+    "Bem-vindo ao meu portfólio!",
+    "Clique duas vezes em Meus Projetos para ver o que eu já desenvolvi.",
+    "O Internet Explorer leva a um site secreto dos anos 90.",
+    "Quer dizer alguma coisa sobre os projetos ou sobre o portfólio? Abra o Inbox e manda uma mensagem.",
+    "Acha irritante os sons de clique? O botão de volume perto do relógio desliga os sons.",
+    "Na próxima vez que acessar meu site e não quiser ver a inicialização, aperte Esc para pular a inicialização."
+];
+
 // ===== TOCAR O SOM DE INÍCIO (só se o som estiver ligado) =====
 // NOVO: uma função só, usada no fim da sequência e no Esc
 function tocarSomInicio() {
@@ -58,7 +71,10 @@ function terminarInicializacao() {
     areaDeTrabalho.classList.remove("oculta");
     barraDeTarefas.classList.remove("oculta");
     document.body.classList.remove("carregando");
+    abrirJanela(janelaBoasVindas);
 }
+
+
 
 // ===== A SEQUÊNCIA DE INICIALIZAÇÃO =====
 async function iniciar() {
@@ -147,4 +163,34 @@ document.addEventListener("pointerdown", (evento) => {
 botaoVolume.addEventListener("click", () => {
     somLigado = !somLigado;
     console.log("som ligado?", somLigado);
+});
+
+// ===== QUANDO CLICAR EM UM BOTÃO DE FECHAR =====
+document.addEventListener("click", (evento) => {
+    const botao = evento.target.closest(".botao-fechar");
+    if (!botao) return;
+
+    const janela = botao.closest(".janela");
+    fecharJanela(janela);
+});
+
+// ===== QUANDO ABRIR UMA JANELA =====
+function abrirJanela(janela) {
+    janela.classList.remove("oculta");
+}
+
+function fecharJanela(janela) {
+    janela.classList.add("oculta");
+}
+
+let indiceDica = Math.floor(Math.random() * dicas.length);
+
+
+function mostrarDica() {
+    textoDica.textContent = dicas[indiceDica];
+}
+
+botaoProximaDica.addEventListener("click", () => {
+    mostrarDica();
+    indiceDica = (indiceDica + 1) % dicas.length;
 });
