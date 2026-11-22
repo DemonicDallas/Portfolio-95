@@ -231,6 +231,8 @@ legend {
 .sm-lista,
 .ex-endereco,
 .ex-conteudo,
+#janela-inbox input,
+#ib-mensagem,
 .dh-hora {
     font: inherit;
     /* senão, select e input usam a fonte do sistema */
