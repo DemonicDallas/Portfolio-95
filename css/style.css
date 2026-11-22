@@ -1271,6 +1271,85 @@ legend {
 
 
 
+/* ===== INBOX ===== */
+/* a janela de "Nova mensagem" */
+
+#janela-inbox {
+    width: 560px;
+}
+
+#janela-inbox.maximizada {
+    width: 100%;
+    height: calc(100vh - var(--altura-barra));
+}
+
+.ib-menu {
+    display: flex;
+    gap: 16px;
+    padding: 4px 6px;
+}
+
+/* o formulário ocupa o resto da janela; a mensagem cresce junto */
+.ib-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;        /* um embaixo do outro */
+}
+
+/* a barra com o botão Enviar, com linhas cavadas em cima e embaixo */
+.ib-ferramentas {
+    padding: 4px 6px;
+    border-top: 2px groove var(--branco);
+    border-bottom: 2px groove var(--branco);
+}
+
+/* rótulos numa coluna, campos na outra */
+.ib-campos {
+    display: grid;
+    grid-template-columns: 80px 1fr;   /* 80px para o rótulo, o resto para o campo */
+    align-items: center;
+    gap: 6px 8px;
+    padding: 8px 6px;
+}
+
+.ib-campos label {
+    text-align: right;
+}
+
+/* o campo "Para", que não dá para mudar */
+#ib-para:disabled {
+    background: var(--cinza);
+    color: var(--preto);
+}
+
+/* o texto da mensagem */
+#ib-mensagem {
+    flex: 1;
+    min-height: 200px;
+    margin: 0 6px;
+    resize: none;                /* sem o cantinho de redimensionar */
+}
+
+/* sem o contorno grosso do navegador quando o campo está com o cursor */
+#janela-inbox input:focus,
+#ib-mensagem:focus {
+    outline: none;
+}
+
+/* esconde a armadilha de robôs */
+.ib-armadilha {
+    display: none;
+}
+
+.ib-status {
+    padding: 2px 6px;
+    margin-top: 6px;
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco);
+}
+
+
 /* ===== UTILITÁRIOS ===== */
 
 /* esconde qualquer elemento (o JS põe e tira essa classe) */

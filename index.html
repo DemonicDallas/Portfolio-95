@@ -8,9 +8,9 @@
     <title>Portfólio-95</title>
 
     <!-- o ?v=N obriga o navegador a baixar a versão nova (aumente a cada commit) -->
-    <link rel="stylesheet" href="css/style.css?v=10">
+    <link rel="stylesheet" href="css/style.css?v=11">
     <!-- defer: o script só roda depois que o HTML inteiro carregou -->
-    <script src="js/script.js?v=10" defer></script>
+    <script src="js/script.js?v=11" defer></script>
     <link rel="icon" href="img/icones/windows-plus-my-computer.png">
 
 </head>
@@ -837,6 +837,58 @@
             <div class="relogio">12:00</div>
         </div>
     </footer>
+
+    <!-- Inbox: uma mensagem nova para mim -->
+<div id="janela-inbox" class="janela oculta">
+    <div class="barra-titulo">
+        <span class="titulo">Nova mensagem - Inbox</span>
+        <div class="botoes-titulo">
+            <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
+            <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
+            <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+        </div>
+    </div>
+
+    <!-- barra de menus (só enfeite) -->
+    <div class="ib-menu">
+        <span><u>A</u>rquivo</span>
+        <span><u>E</u>ditar</span>
+        <span>E<u>x</u>ibir</span>
+        <span>Aj<u>u</u>da</span>
+    </div>
+
+    <form id="ib-form" class="ib-form" action="https://formspree.io/f/xyewnnnj" method="POST">
+        <!-- barra de ferramentas: o botão Enviar -->
+        <div class="ib-ferramentas">
+            <button id="ib-enviar" type="submit">✉ Enviar</button>
+        </div>
+
+        <!-- os campos do cabeçalho -->
+        <div class="ib-campos">
+            <label for="ib-para">Para:</label>
+            <input id="ib-para" type="text" value="André Luiz" disabled>
+
+            <label for="ib-nome">Nome:</label>
+            <input id="ib-nome" name="nome" type="text" required>
+
+            <label for="ib-email">E-mail:</label>
+            <input id="ib-email" name="email" type="email" required>
+
+            <label for="ib-assunto">Assunto:</label>
+            <input id="ib-assunto" name="assunto" type="text" required>
+        </div>
+
+        <!-- o texto da mensagem -->
+        <textarea id="ib-mensagem" name="mensagem" required
+            placeholder="Escreva sua mensagem aqui..."></textarea>
+
+        <!-- armadilha para robôs: pessoas não veem este campo -->
+        <input class="ib-armadilha" type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+    </form>
+
+    <!-- barra de status -->
+    <div id="ib-status" class="ib-status">Pronto</div>
+</div>
 
     <!-- ===== MENU INICIAR ===== -->
     <!-- abre pelo botão Iniciar; só os itens com data-janela abrem alguma coisa -->

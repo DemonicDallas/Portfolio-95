@@ -818,6 +818,38 @@ document.addEventListener("keydown", (evento) => {
     apertar(tecla);
 });
 
+// ===== INBOX =====
+// envia a mensagem para o Formspree sem sair do site
+const ibForm = document.getElementById("ib-form");
+const ibEnviar = document.getElementById("ib-enviar");
+const ibStatus = document.getElementById("ib-status");
+
+ibForm.addEventListener("submit", async (evento) => {
+    evento.preventDefault();                 // não sai do site
+
+    ibEnviar.disabled = true;                // evita enviar duas vezes
+    ibStatus.textContent = "Enviando...";
+
+    try {
+        const resposta = await fetch(ibForm.action, {
+            method: "POST",
+            body: new FormData(ibForm),          // pega todos os campos que têm "name"
+            headers: { "Accept": "application/json" }
+        });
+
+        if (resposta.ok) {
+            ibStatus.textContent = "Mensagem enviada! Obrigado :)";
+            ibForm.reset();                        // limpa os campos
+        } else {
+            ibStatus.textContent = "Não foi possível enviar. Tente de novo.";
+        }
+    } catch {
+        ibStatus.textContent = "Sem conexão. Tente de novo.";
+    }
+
+    ibEnviar.disabled = false;                 // libera o botão de novo
+});
+
 // ===== MENU INICIAR =====
 // abre e fecha pelo botão Iniciar; fecha com Esc ou clicando fora
 const menuIniciar = document.getElementById("menu-iniciar");
