@@ -626,7 +626,7 @@ function voltarPasta() {
 
     exEndereco.textContent = "C:\\Meus Projetos";
     exVoltar.disabled = true;
-    exStatus.textContent = "4 objeto(s)";
+    exStatus.textContent = "6 objeto(s)";
 }
 
 // dois cliques num ícone de projeto → abre a página dele

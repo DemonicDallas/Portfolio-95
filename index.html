@@ -8,9 +8,9 @@
     <title>Portfólio-95</title>
 
     <!-- o ?v=N obriga o navegador a baixar a versão nova (aumente a cada commit) -->
-    <link rel="stylesheet" href="css/style.css?v=9">
+    <link rel="stylesheet" href="css/style.css?v=10">
     <!-- defer: o script só roda depois que o HTML inteiro carregou -->
-    <script src="js/script.js?v=9" defer></script>
+    <script src="js/script.js?v=10" defer></script>
     <link rel="icon" href="img/icones/windows-plus-my-computer.png">
 
 </head>
@@ -86,7 +86,7 @@
 
         <button class="icone" type="button" data-janela="curriculo">
             <img src="img/icones/windows-documents.png" alt="">
-            <span>Currículo</span>
+            <span>cv</span>
         </button>
 
         <button class="icone" type="button" data-janela="calculadora">
@@ -288,6 +288,20 @@
                         </button>
                     </div>
 
+                    <p class="ex-grupo">Pesquisa</p>
+                    <div class="ex-icones">
+                        <button class="ex-item" type="button" data-projeto="pibic"
+                            data-descricao="Codificador e decodificador de dados por radiofrequência.">
+                            <img src="img/icones/windows-plus-folder.png" alt="">
+                            <span>Sinais de rádio (PIBIC)</span>
+                        </button>
+                        <button class="ex-item" type="button" data-projeto="fapemig"
+                            data-descricao="Machine Learning para indicar vagas de estágio em TI.">
+                            <img src="img/icones/windows-plus-folder.png" alt="">
+                            <span>Vagas de estágio (FAPEMIG)</span>
+                        </button>
+                    </div>
+
                     <p class="ex-grupo">Em breve</p>
                     <ul class="ex-breve">
                         <li>Visualizador de algoritmos</li>
@@ -443,107 +457,202 @@
                     <a class="ex-repo" href="https://github.com/DemonicDallas/Portfolio-95" target="_blank">Ver o
                         repositório</a>
                 </article>
+                <article id="proj-pibic" class="ex-projeto oculta">
+                    <h2>Dados e voz codificados em sinais eletromagnéticos</h2>
+                    <p class="ex-data">2025 - 2026 · Bolsista PIBIC/IFTM</p>
+                    <div class="ex-tecnologias">
+                        <span class="ex-tec">Arduino</span>
+                        <span class="ex-tec">C++</span>
+                        <span class="ex-tec">Radiofrequência</span>
+                        <span class="ex-tec">Eletrônica</span>
+                    </div>
+                    <h3>Contexto</h3>
+                    <p>Projeto de iniciação científica sobre transmitir dados digitais por radiofrequência, com
+                        tecnologia barata e fácil de encontrar. Um transmissor codifica informações (umidade,
+                        temperatura, velocidade e estado de dispositivos) em binário, e um microcontrolador no receptor
+                        decodifica e mostra os dados em formato legível. Apresentado no XV SIN do IFTM (2025).
+                        Orientador: Prof. Marcelo Loures Ribeiro.</p>
+                    <h3>O que eu fiz</h3>
+                    <ul>
+                        <li>Fui o bolsista do projeto, numa equipe com 4 voluntários</li>
+                        <li>Fiz os testes iniciais em simuladores e depois montei o protótipo físico</li>
+                        <li>Construí o codificador e o decodificador de bits</li>
+                        <li>Medi os sinais: o nível lógico 1 saiu com 5,21 V e chegou com 4,4 V, e a frequência variou
+                            só 0,12 Hz, sem erro na palavra transmitida</li>
+                    </ul>
+                    <h3>Banner</h3>
+                    <div class="ex-prints">
+                        <img class="ex-print" src="img/projetos/banner-pibic.jpg"
+                            alt="Banner do projeto apresentado no SIN 2025">
+                    </div>
+                </article>
+
+                <article id="proj-fapemig" class="ex-projeto oculta">
+                    <h2>Treinamento de um sistema para selecionar vagas de estágio em TI</h2>
+                    <p class="ex-data">2026 - 2027 · Bolsista PIBIC/FAPEMIG (em andamento)</p>
+                    <div class="ex-tecnologias">
+                        <span class="ex-tec">Machine Learning</span>
+                        <span class="ex-tec">Pesquisa de mercado</span>
+                    </div>
+                    <h3>Contexto</h3>
+                    <p>Muitos estudantes de TI têm dificuldade em achar vagas de estágio compatíveis com o que já sabem.
+                        A pesquisa analisa os requisitos das vagas e treina um sistema de Machine Learning que relaciona
+                        o perfil do estudante às oportunidades, sugerindo a vaga mais adequada e o que ainda falta
+                        aprender. Apresentado no XVI SIN do IFTM. Orientadora: Profª. Reane Franco Goulart.</p>
+                    <h3>O que eu fiz</h3>
+                    <ul>
+                        <li>Mapeei empresas e requisitos de vagas de estágio no LinkedIn, Glassdoor e Indeed, nas áreas
+                            de Desenvolvimento, Dados e BI, Infraestrutura e Cloud e Segurança</li>
+                        <li>Identifiquei tendências do mercado, como a valorização da capacidade de aprender mais do que
+                            da experiência</li>
+                        <li>Criei o questionário que vai levantar o conhecimento técnico dos estudantes</li>
+                        <li>Estou estudando algoritmos de classificação e comparação de texto para treinar o sistema
+                        </li>
+                    </ul>
+                    <h3>Banner</h3>
+                    <div class="ex-prints">
+                        <img class="ex-print" src="img/projetos/banner-fapemig.jpg"
+                            alt="Banner do projeto apresentado no SIN">
+                    </div>
+                </article>
+
             </div>
         </div>
 
         <!-- barra de status -->
-        <div class="ex-status" id="ex-status">4 objeto(s)</div>
+        <div class="ex-status" id="ex-status">6 objeto(s)</div>
     </div>
 
     <!-- Currículo: um documento aberto no WordPad -->
-<div id="janela-curriculo" class="janela oculta">
-    <div class="barra-titulo">
-        <span class="titulo">Currículo - WordPad</span>
-        <div class="botoes-titulo">
-            <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
-            <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
-            <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
-        </div>
-    </div>
-
-    <!-- barra de menus (só enfeite) -->
-    <div class="wp-menu">
-        <span><u>A</u>rquivo</span>
-        <span><u>E</u>ditar</span>
-        <span>E<u>x</u>ibir</span>
-        <span><u>I</u>nserir</span>
-        <span><u>F</u>ormatar</span>
-        <span>Aj<u>u</u>da</span>
-    </div>
-
-    <!-- barra de formatação: fonte, tamanho, negrito, itálico, sublinhado -->
-    <div class="wp-formatacao">
-        <span class="wp-campo wp-fonte">Times New Roman</span>
-        <span class="wp-campo wp-tamanho">12</span>
-        <button type="button"><b>N</b></button>
-        <button type="button"><i>I</i></button>
-        <button type="button"><u>S</u></button>
-    </div>
-
-    <!-- a régua com os tracinhos -->
-    <div class="wp-regua"></div>
-
-    <!-- a área do documento: a folha rola, o botão fica parado no canto -->
-    <div class="wp-area">
-        <div class="wp-documento">
-            <div class="wp-folha">
-                <!-- topo: foto, nome e cargo -->
-                <div class="cv-topo">
-                    <img class="cv-foto" src="img/Curriculo/Foto-perfil.png" alt="">
-                    <div>
-                        <h1 class="cv-nome">André Luiz Dias Moreira</h1>
-                        <p class="cv-cargo">Estudante de Ciência da Computação</p>
-                    </div>
-                </div>
-
-                <h2 class="cv-secao">Formação</h2>
-                <div class="cv-item">
-                    <p class="cv-titulo">Bacharelado em Ciência da Computação</p>
-                    <p class="cv-lugar">IFTM, Campus Ituiutaba | 2023 - em andamento</p>
-                </div>
-
-                <h2 class="cv-secao">Pesquisa e extensão</h2>
-                <div class="cv-item">
-                    <p class="cv-titulo">Bolsista PIBIC</p>
-                    <p class="cv-lugar">IFTM | 2025 - 2026</p>
-                    <ul>
-                        <li>Projeto <i>Dados e voz codificados em sinais eletromagnéticos</i></li>
-                        <li>Orientador: Prof. Marcelo Loures Ribeiro</li>
-                    </ul>
-                </div>
-                <div class="cv-item">
-                    <p class="cv-titulo">Bolsista FAPEMIG</p>
-                    <p class="cv-lugar">IFTM | 2026 - 2027</p>
-                    <ul>
-                        <li>Sistema que indica vagas de estágio para estudantes de TI</li>
-                        <li>Orientadora: Profª. Reane Franco Goulart</li>
-                    </ul>
-                </div>
-
-                <h2 class="cv-secao">Projetos</h2>
-                <div class="cv-item">
-                    <p class="cv-titulo">FarmaStock</p>
-                    <p class="cv-lugar">Engenharia de Software I | ???</p>
-                    <ul>
-                        <li>Sistema de farmácia com design no Figma, em Python e MySQL</li>
-                    </ul>
-                </div>
-                <!-- Pokédex, Sensores de gases e Portfólio 95: mesmo modelo -->
-
-                <h2 class="cv-secao">Habilidades</h2>
-                <p>HTML · CSS · JavaScript · Python · Java · C · Git e GitHub · Octave · MySQL · Linux</p>
-
-                <h2 class="cv-secao">Idiomas</h2>
-                <p>Português (nativo) · Inglês (intermediário) · Espanhol (básico) · Japonês (básico)</p>
+    <div id="janela-curriculo" class="janela oculta">
+        <div class="barra-titulo">
+            <span class="titulo">Currículo - WordPad</span>
+            <div class="botoes-titulo">
+                <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
+                <button class="botao-maximizar" type="button" aria-label="Maximizar">□</button>
+                <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
             </div>
         </div>
 
-        <a class="cv-baixar" href="docs/curriculo.pdf" download>Baixar o currículo</a>
-    </div>
+        <!-- barra de menus (só enfeite) -->
+        <div class="wp-menu">
+            <span><u>A</u>rquivo</span>
+            <span><u>E</u>ditar</span>
+            <span>E<u>x</u>ibir</span>
+            <span><u>I</u>nserir</span>
+            <span><u>F</u>ormatar</span>
+            <span>Aj<u>u</u>da</span>
+        </div>
 
-    <!-- barra de status -->
-    <div class="wp-status">Para obter ajuda, pressione F1</div>
-</div>
+        <!-- barra de formatação: fonte, tamanho, negrito, itálico, sublinhado -->
+        <div class="wp-formatacao">
+            <span class="wp-campo wp-fonte">Times New Roman</span>
+            <span class="wp-campo wp-tamanho">12</span>
+            <button type="button"><b>N</b></button>
+            <button type="button"><i>I</i></button>
+            <button type="button"><u>S</u></button>
+        </div>
+
+        <!-- a régua com os tracinhos -->
+        <div class="wp-regua"></div>
+
+        <!-- a área do documento: a folha rola, o botão fica parado no canto -->
+        <div class="wp-area">
+            <div class="wp-documento">
+                <div class="wp-folha">
+                    <!-- topo: foto, nome e cargo -->
+                    <div class="cv-topo">
+                        <img class="cv-foto" src="img/Curriculo/Foto-perfil.png" alt="">
+                        <div>
+                            <h1 class="cv-nome">André Luiz Dias Moreira</h1>
+                            <p class="cv-cargo">Estudante de Ciência da Computação</p>
+                        </div>
+                    </div>
+
+                    <h2 class="cv-secao">Formação</h2>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Bacharelado em Ciência da Computação</p>
+                        <p class="cv-lugar">IFTM, Campus Ituiutaba | 2023 - em andamento</p>
+                    </div>
+
+                    <h2 class="cv-secao">Pesquisa e extensão</h2>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Bolsista PIBIC</p>
+                        <p class="cv-lugar">IFTM | 2025 - 2026</p>
+                        <ul>
+                            <li>Projeto <i>Dados e voz codificados em sinais eletromagnéticos</i></li>
+                            <li>Orientador: Prof. Marcelo Loures Ribeiro</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Bolsista FAPEMIG</p>
+                        <p class="cv-lugar">IFTM | 2026 - 2027</p>
+                        <ul>
+                            <li>Sistema que indica vagas de estágio para estudantes de TI</li>
+                            <li>Orientadora: Profª. Reane Franco Goulart</li>
+                        </ul>
+                    </div>
+
+                    <h2 class="cv-secao">Projetos</h2>
+                    <div class="cv-item">
+                        <p class="cv-titulo">FarmaStock</p>
+                        <p class="cv-lugar">Engenharia de Software I | 06/2026</p>
+                        <ul>
+                            <li>Sistema de farmácia com design no Figma, em Python e MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Pokédex</p>
+                        <p class="cv-lugar">Programação Web I | 06/2026</p>
+                        <ul>
+                            <li>Aplicação web para visualização de informações sobre pokémons</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Sensores de gases</p>
+                        <p class="cv-lugar">Projeto Integrador Extensionista II | 06/2026</p>
+                        <ul>
+                            <li>Sistema de monitoramento de gases em tempo real</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Portfólio 95</p>
+                        <p class="cv-lugar">Desenvolvimento de Software | 06/2026</p>
+                        <ul>
+                            <li>Desenvolvimento de um portfólio digital com HTML, CSS e JavaScript</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Dados e voz codificados em sinais eletromagnéticos</p>
+                        <p class="cv-lugar"> PIBIC/IFTM | 2025/2026</p>
+                        <ul>
+                            <li>Estudo e análise de como dados e voz são codificados em sinais eletromagnéticos</li>
+                        </ul>
+                    </div>
+                    <div class="cv-item">
+                        <p class="cv-titulo">Treinamento de um sistema para selecionar vagas de estágio aos estudantes
+                            na área da TI</p>
+                        <p class="cv-lugar"> FAPEMIG/IFTM | 2026/2027</p>
+                        <ul>
+                            <li>Desenvolvimento de um sistema para selecionar vagas de estágio aos estudantes na área da
+                                TI</li>
+                        </ul>
+                    </div>
+
+                    <h2 class="cv-secao">Habilidades</h2>
+                    <p>HTML · CSS · JavaScript · React · Python · Java · C · Git e GitHub · Octave · MySQL · Linux</p>
+
+                    <h2 class="cv-secao">Idiomas</h2>
+                    <p>Português (nativo) · Inglês (intermediário) · Espanhol (básico) · Japonês (básico)</p>
+                </div>
+            </div>
+
+            <a class="cv-baixar" href="docs/curriculo.pdf" download>Baixar o currículo</a>
+        </div>
+
+        <!-- barra de status -->
+        <div class="wp-status">Para obter ajuda, pressione F1</div>
+    </div>
 
     <!-- Data/Hora: abre com dois cliques no relógio -->
     <div id="janela-data-hora" class="janela oculta">
