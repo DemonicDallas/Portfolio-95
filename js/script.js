@@ -646,6 +646,178 @@ document.addEventListener("click", (evento) => {
 
 exVoltar.addEventListener("click", voltarPasta);
 
+// ===== CALCULADORA =====
+// guarda o número do visor, o primeiro número e a operação escolhida
+const janelaCalc = document.getElementById("janela-calculadora");
+const calcVisor = document.getElementById("calc-visor");
+
+let visor = "0";          // o texto do número que está no visor
+let acumulado = null;     // o primeiro número da conta (antes do + - * /)
+let operacao = null;      // a operação escolhida: "+", "-", "*" ou "/"
+let novoNumero = true;    // true = o próximo dígito começa um número novo
+
+// o número do visor, como número de verdade (e não texto)
+function numero() {
+    return parseFloat(visor);
+}
+
+// transforma o resultado em texto, sem os erros de arredondamento
+function formatar(resultado) {
+    if (!isFinite(resultado)) {
+        return "Erro";                                      // divisão por zero, raiz de negativo
+    }
+    return String(parseFloat(resultado.toPrecision(12)));   // 0.1 + 0.2 → "0.3"
+}
+
+// escreve no visor; o Win95 sempre mostra um ponto no fim ("12.")
+function mostrar() {
+    const temPonto = visor.includes(".") || visor === "Erro";
+    calcVisor.textContent = temPonto ? formatar(numero()) : visor + ".";
+}
+
+// um número foi apertado
+function digitar(digito) {
+    if (novoNumero) {
+        visor = digito;          // começa um número novo
+        novoNumero = false;
+    } else if (visor === "0") {
+        visor = digito;          // troca o zero do começo
+    } else if (visor.length < 16) {
+        visor = visor + digito;     // coloca o dígito no fim
+    }
+}
+
+// a vírgula
+function ponto() {
+    if (novoNumero) {
+        visor = "0.";
+        novoNumero = false;
+    } else if (!visor.includes(".")) {   // só se ainda não tiver uma
+        visor = visor + ".";
+    }
+}
+
+// faz a conta entre dois números
+function conta(a, op, b) {
+    if (op === "+") return a + b;
+    if (op === "-") return a - b;
+    if (op === "*") return a * b;
+    if (op === "/") return a / b;
+}
+
+// + - * / foi apertado
+function escolherOperacao(op) {
+    if (operacao !== null && !novoNumero) {
+        calcular();              // 2 + 3 + → já mostra 5
+    }
+    acumulado = numero();
+    operacao = op;
+    novoNumero = true;            // o próximo dígito começa o segundo número
+}
+
+// o =
+function calcular() {
+    if (operacao === null) return;   // sem operação, não tem conta para fazer
+    visor = formatar(conta(acumulado, operacao, numero()));
+    acumulado = null;
+    operacao = null;
+    novoNumero = true;
+}
+
+// sqrt, 1/x e %: trocam o número do visor por um resultado
+function aplicar(resultado) {
+    visor = formatar(resultado);
+    novoNumero = true;
+}
+
+// C: zera tudo
+function limparTudo() {
+    visor = "0";
+    acumulado = null;
+    operacao = null;
+    novoNumero = true;
+}
+
+// CE: zera só o número que está sendo digitado (a conta continua)
+function limparEntrada() {
+    visor = "0";
+    novoNumero = true;
+}
+
+// Backspace: apaga o último dígito
+function apagar() {
+    if (novoNumero) return;
+    visor = visor.slice(0, -1);            // do começo até um antes do fim
+    if (visor === "" || visor === "-") {
+        visor = "0";
+    }
+}
+
+// +/-: troca o sinal
+function trocarSinal() {
+    if (visor === "0" || visor === "Erro") return;
+    visor = visor.startsWith("-") ? visor.slice(1) : "-" + visor;
+}
+
+// decide o que fazer com cada tecla
+function apertar(tecla) {
+    switch (tecla) {
+        case ".":       ponto(); break;
+        case "+":
+        case "-":
+        case "*":
+        case "/":       escolherOperacao(tecla); break;
+        case "=":       calcular(); break;
+        case "C":       limparTudo(); break;
+        case "CE":      limparEntrada(); break;
+        case "back":    apagar(); break;
+        case "sinal":   trocarSinal(); break;
+        case "raiz":    aplicar(Math.sqrt(numero())); break;
+        case "inverso": aplicar(1 / numero()); break;
+        case "%":       aplicar(operacao !== null ? acumulado * numero() / 100 : 0); break;
+        default:        digitar(tecla);          // os números de 0 a 9
+    }
+    mostrar();
+}
+
+// clicou numa tecla da calculadora
+janelaCalc.addEventListener("click", (evento) => {
+    const botao = evento.target.closest(".calc button");
+    if (!botao) return;
+    if (!botao.dataset.tecla) return;           // teclas sem data-tecla (a memória) ainda não fazem nada
+    apertar(botao.dataset.tecla);
+});
+
+// usou o teclado com a calculadora na frente
+const teclasDoTeclado = {
+    "Enter": "=",
+    "=": "=",
+    "Escape": "C",
+    "Delete": "CE",
+    "Backspace": "back",
+    ",": ".",
+    ".": ".",
+    "+": "+",
+    "-": "-",
+    "*": "*",
+    "/": "/",
+    "%": "%"
+};
+
+document.addEventListener("keydown", (evento) => {
+    if (janelaCalc.classList.contains("oculta")) return;    // calculadora fechada
+    if (janelaCalc.classList.contains("inativa")) return;   // outra janela na frente
+
+    let tecla = teclasDoTeclado[evento.key];
+    if (evento.key.length === 1 && "0123456789".includes(evento.key)) {
+        tecla = evento.key;
+    }
+    if (!tecla) return;           // tecla que a calculadora não usa
+
+    evento.preventDefault();      // impede o Enter de "clicar" o botão que está com foco
+    apertar(tecla);
+});
+
 // ===== MENU INICIAR =====
 // abre e fecha pelo botão Iniciar; fecha com Esc ou clicando fora
 const menuIniciar = document.getElementById("menu-iniciar");

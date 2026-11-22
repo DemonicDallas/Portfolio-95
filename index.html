@@ -654,6 +654,76 @@
         <div class="wp-status">Para obter ajuda, pressione F1</div>
     </div>
 
+    <!-- Calculadora: igual à do Windows 95 -->
+    <div id="janela-calculadora" class="janela oculta">
+        <div class="barra-titulo">
+            <span class="titulo">Calculadora</span>
+            <div class="botoes-titulo">
+                <button class="botao-minimizar" type="button" aria-label="Minimizar">_</button>
+                <button class="botao-fechar" type="button" aria-label="Fechar">✕</button>
+            </div>
+        </div>
+
+        <!-- barra de menus (só enfeite) -->
+        <div class="calc-menu">
+            <span><u>E</u>ditar</span>
+            <span>E<u>x</u>ibir</span>
+            <span>Aj<u>u</u>da</span>
+        </div>
+
+        <div class="calc">
+            <!-- o visor -->
+            <div id="calc-visor" class="calc-visor">0.</div>
+
+            <!-- a linha de cima: indicador de memória, Backspace, CE e C -->
+            <div class="calc-topo">
+                <span class="calc-indicador"></span>
+                <button type="button" class="calc-vermelho" data-tecla="back">Backspace</button>
+                <button type="button" class="calc-vermelho" data-tecla="CE">CE</button>
+                <button type="button" class="calc-vermelho" data-tecla="C">C</button>
+            </div>
+
+            <div class="calc-corpo">
+                <!-- a coluna da memória (o desafio do Passo 4 dá vida a ela) -->
+                <div class="calc-memoria">
+                    <button type="button" class="calc-vermelho">MC</button>
+                    <button type="button" class="calc-vermelho">MR</button>
+                    <button type="button" class="calc-vermelho">MS</button>
+                    <button type="button" class="calc-vermelho">M+</button>
+                </div>
+
+                <!-- os números e as operações: 5 colunas, 4 linhas -->
+                <div class="calc-teclas">
+                    <button type="button" data-tecla="7">7</button>
+                    <button type="button" data-tecla="8">8</button>
+                    <button type="button" data-tecla="9">9</button>
+                    <button type="button" class="calc-vermelho" data-tecla="/">/</button>
+                    <button type="button" data-tecla="raiz">sqrt</button>
+
+                    <button type="button" data-tecla="4">4</button>
+                    <button type="button" data-tecla="5">5</button>
+                    <button type="button" data-tecla="6">6</button>
+                    <button type="button" class="calc-vermelho" data-tecla="*">*</button>
+                    <button type="button" data-tecla="%">%</button>
+
+                    <button type="button" data-tecla="1">1</button>
+                    <button type="button" data-tecla="2">2</button>
+                    <button type="button" data-tecla="3">3</button>
+                    <button type="button" class="calc-vermelho" data-tecla="-">-</button>
+                    <button type="button" data-tecla="inverso">1/x</button>
+
+                    <button type="button" data-tecla="0">0</button>
+                    <button type="button" data-tecla="sinal">+/-</button>
+                    <button type="button" data-tecla=".">,</button>
+                    <button type="button" class="calc-vermelho" data-tecla="+">+</button>
+                    <button type="button" class="calc-vermelho" data-tecla="=">=</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- Data/Hora: abre com dois cliques no relógio -->
     <div id="janela-data-hora" class="janela oculta">
         <div class="barra-titulo">

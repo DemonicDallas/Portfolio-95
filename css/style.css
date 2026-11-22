@@ -1184,6 +1184,92 @@ legend {
 }
 
 
+/* ===== CALCULADORA ===== */
+/* a Calculadora no modo padrão do Windows 95 */
+
+#janela-calculadora {
+    width: 360px;
+}
+
+.calc-menu {
+    display: flex;
+    gap: 16px;
+    padding: 4px 6px;
+}
+
+/* a parte de dentro: visor, linha de cima e teclas */
+.calc {
+    padding: 8px 10px 12px;
+}
+
+/* o visor: branco, afundado, com o número encostado na direita */
+.calc-visor {
+    margin-bottom: 10px;
+    padding: 4px 8px;
+    background: var(--branco);
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco);
+    text-align: right;
+}
+
+/* indicador de memória + Backspace, CE e C */
+.calc-topo {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.calc-topo button {
+    flex: 1;                  /* os três dividem o espaço igualmente */
+    padding: 4px 0;
+}
+
+/* o quadradinho afundado à esquerda (mostra "M" quando tem algo na memória) */
+.calc-indicador {
+    width: 44px;
+    margin-right: 10px;
+    text-align: center;
+    box-shadow:
+        inset 1px 1px var(--cinza-escuro),
+        inset -1px -1px var(--branco);
+}
+
+/* a coluna da memória e a grade de teclas lado a lado */
+.calc-corpo {
+    display: flex;
+    gap: 16px;
+}
+
+.calc-memoria {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);     /* 4 linhas */
+    gap: 6px;
+    width: 44px;
+}
+
+/* a grade das teclas, igual ao calendário da Data/Hora (que tinha 7 colunas) */
+.calc-teclas {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+}
+
+/* as teclas: azuis, como no Win95 */
+.calc .calc-memoria button,
+.calc .calc-teclas button {
+    height: 34px;
+    padding: 0;
+    color: #0000FF;
+}
+
+/* operações, memória e Backspace/CE/C: vermelhas */
+.calc button.calc-vermelho {
+    color: #FF0000;
+}
+
+
 
 /* ===== UTILITÁRIOS ===== */
 
